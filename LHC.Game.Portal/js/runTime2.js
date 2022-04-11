@@ -25,13 +25,15 @@ function handtimeRunForOpen() {
         return;
     }
 
-    //重新开始投注
-    if (lType == 3 || lType == 7 || lType == 8 || lType == 9 || lType == 11) {      //带小时的
-        timeRunForOpen2();
-    }
-    else {
-        timeRunForOpen();
-    }
+    ////重新开始投注
+    //if (lType == 3 || lType == 7 || lType == 8 || lType == 9 || lType == 11) {      //带小时的
+    //    timeRunForOpen2();
+    //}
+    //else {
+    //    timeRunForOpen();
+    //}
+
+    timeRunForOpen2();
 
 }
 

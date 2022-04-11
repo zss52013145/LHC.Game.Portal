@@ -16,8 +16,13 @@
     <link href="/static/css/app.bdf2bc5bf14cea19c93045c00598b783.css" rel="stylesheet">
 
     <script src="/js/jquery-1.8.3.min.js"></script>
+
+
+    <script src="/js/public.js"></script>
     <script src="/js/play.js"></script>
     <script src="/js/function.js"></script>
+    <script src="/js/runTime.js"></script>
+    <script src="/js/runTime2.js"></script>
 
 
     <style type="text/css">
@@ -104,16 +109,18 @@
                     <div data-v-499e4406="" class="t_tab-logo"><span data-v-499e4406="" class="webname">都利</span></div>
                     <div data-v-499e4406="" class="t_btn-list clearBoth">
 
-                        @if (ViewBag.lType == 3) { 
+                        @if (ViewBag.lType == 3)
+                        { 
                             <button data-v-499e4406="" cid="1" class="caiSelect t_btn-item t_tab-btn t_btn-d"><span data-v-499e4406="">香港</span> <span data-v-499e4406="">六合彩</span></button>
                             <button data-v-499e4406="" cid="3" class="caiSelect t_btn-item t_tab-btn t_btn-d router-link-active"><span data-v-499e4406="">澳门</span> <span data-v-499e4406="">六合彩</span></button>
                         }
-                        else{
-                             <button data-v-499e4406="" cid="1" class="caiSelect t_btn-item t_tab-btn t_btn-d router-link-active"><span data-v-499e4406="">香港</span> <span data-v-499e4406="">六合彩</span></button>
-                             <button data-v-499e4406="" cid="3" class="caiSelect t_btn-item t_tab-btn t_btn-d"><span data-v-499e4406="">澳门</span> <span data-v-499e4406="">六合彩</span></button>
+                        else
+                        {
+                            <button data-v-499e4406="" cid="1" class="caiSelect t_btn-item t_tab-btn t_btn-d router-link-active"><span data-v-499e4406="">香港</span> <span data-v-499e4406="">六合彩</span></button>
+                            <button data-v-499e4406="" cid="3" class="caiSelect t_btn-item t_tab-btn t_btn-d"><span data-v-499e4406="">澳门</span> <span data-v-499e4406="">六合彩</span></button>
                         }
 
-                        
+
                     </div>
                     <div data-v-499e4406="" class="fixed-right">
                         <div data-v-499e4406="" class="button t_btn-item t_tab-btn t_btn-d game">
@@ -149,18 +156,18 @@
                         <ul data-v-360b34d8="">
                             <li data-v-360b34d8=""><span data-v-360b34d8="">总信用额 : </span><span data-v-360b34d8="" class="default-color">@user.CreditLine</span></li>
                             <li data-v-360b34d8=""><span data-v-360b34d8="">可用余额 : </span><span data-v-360b34d8="" class="default-color"><mark data-v-360b34d8="">@user.Money</mark></span></li>
-                            <li data-v-360b34d8=""><span data-v-360b34d8="">未结金额 : </span><span data-v-360b34d8="" class="default-color"><mark data-v-360b34d8="">0</mark></span></li>
+                            <li data-v-360b34d8=""><span data-v-360b34d8="">未结金额 : </span><span data-v-360b34d8="" class="default-color"><mark data-v-360b34d8="">@ViewBag.weijieMoney</mark></span></li>
                             <li data-v-360b34d8=""><span data-v-360b34d8="">用户类型 : </span><span data-v-360b34d8="" class="default-color">信用盘 <mark data-v-360b34d8="">@user.PanKou</mark></span></li>
-                            <li data-v-360b34d8=""><span data-v-360b34d8="">今日输赢 : </span><span data-v-360b34d8="" class="default-color"><mark data-v-360b34d8="">0</mark></span></li>
+                            <li data-v-360b34d8=""><span data-v-360b34d8="">今日输赢 : </span><span data-v-360b34d8="" class="default-color"><mark data-v-360b34d8="">@ViewBag.todaySY</mark></span></li>
                         </ul>
                     </div>
                     <div data-v-5f2813ea="" class="btn-wrap">
-                        <button data-v-5f2813ea="" class="button t_btn-d side-btn"><i data-v-5f2813ea="" class="icon icon-btn img0"></i><span data-v-5f2813ea="">未结明细</span></button>
-                        <button data-v-5f2813ea="" class="button t_btn-d side-btn"><i data-v-5f2813ea="" class="icon icon-btn img1"></i><span data-v-5f2813ea="">今日已结</span></button>
-                        <button data-v-5f2813ea="" class="button t_btn-d side-btn"><i data-v-5f2813ea="" class="icon icon-btn img2"></i><span data-v-5f2813ea="">历史报表</span></button>
+                        <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="notOpenDetail"><i data-v-5f2813ea="" class="icon icon-btn img0"></i><span data-v-5f2813ea="">未结明细</span></button>
+                        <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="todaySettlement"><i data-v-5f2813ea="" class="icon icon-btn img1"></i><span data-v-5f2813ea="">今日已结</span></button>
+                        <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="historyReport"><i data-v-5f2813ea="" class="icon icon-btn img2"></i><span data-v-5f2813ea="">历史报表</span></button>
                         <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="playInfo"><i data-v-5f2813ea="" class="icon icon-btn img3"></i><span data-v-5f2813ea="">个人信息</span></button>
                         <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="modifyPwd"><i data-v-5f2813ea="" class="icon icon-btn img4"></i><span data-v-5f2813ea="">修改密码</span></button>
-                        <button data-v-5f2813ea="" class="button t_btn-d side-btn"><i data-v-5f2813ea="" class="icon icon-btn img5"></i><span data-v-5f2813ea="">资金明细</span></button>
+                        <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="fundDetail"><i data-v-5f2813ea="" class="icon icon-btn img5"></i><span data-v-5f2813ea="">资金明细</span></button>
                         <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="openResult"><i data-v-5f2813ea="" class="icon icon-btn img0"></i><span data-v-5f2813ea="">开奖结果</span></button>
                         <button data-v-5f2813ea="" class="button t_btn-d side-btn" id="rule"><i data-v-5f2813ea="" class="icon icon-btn img2"></i><span data-v-5f2813ea="">玩法规则</span></button>
                     </div>
@@ -182,7 +189,7 @@
 
                 <div data-v-ee127d4a="" class="c-content">
                     <div data-v-00f66026="" data-v-ee127d4a="" class="b-wrap s-horn">
-                        
+
                         <i data-v-00f66026="" class="icon icon-bbb"></i>
 
 
@@ -232,6 +239,32 @@
                                 <p data-v-2afdfc2d="">暂无期数</p>
                                 <!---->
                             </div>
+
+                            <div data-v-2afdfc2d="" data-v-2db11f03="" class="c_time fr o_timer" style="display:none;">
+
+                                <p data-v-2afdfc2d="">
+                                    第
+                                    <span data-v-2afdfc2d="" class="tc" id="nextIssue">2022101</span>
+                                    期 距封盘:
+                                    <span data-v-2afdfc2d="" class="tc" id="fenpanTime">2时:7分:22秒</span>
+
+                                </p>
+
+                                <p data-v-eb4ccf6e="" data-v-2afdfc2d="" class="countdown" id="openTime">
+
+                                    <span data-v-eb4ccf6e="" class="tx">22秒</span>
+
+                                    <span data-v-eb4ccf6e="" class="tx">17分:</span>
+
+                                    <span data-v-eb4ccf6e="" class="tx">2时:</span>
+
+                                    <span data-v-eb4ccf6e="" class="tx" style="color: black;">&nbsp;距开奖:</span>
+                                </p>
+
+
+                            </div>
+
+
                         </div>
 
 
@@ -290,7 +323,7 @@
 
                             @*输入金额 确认投注*@
                             <div data-v-c53d1624="" data-v-c60dea02="" class="c_a-input c-input">
-                                <ul id="moneySel" data-v-c53d1624="" class="inline_block c_a-list clearBoth" >
+                                <ul id="moneySel" data-v-c53d1624="" class="inline_block c_a-list clearBoth">
                                     <li data-v-c53d1624="" data-chip="10" class="award-icon a_10"></li>
                                     <li data-v-c53d1624="" data-chip="50" class="award-icon a_50"></li>
                                     <li data-v-c53d1624="" data-chip="100" class="award-icon a_100"></li>
@@ -317,8 +350,8 @@
                                 <div data-v-3e43b567="" class="sta-wrap" id="rightPart">
                                     <div data-v-3e43b567="" class="sta-tab clearBoth">
                                         <button data-v-3e43b567="" class="rightBtn normal-btn button t_btn-d active">快速下注</button>
-                                            
-                                        
+
+
                                         <button data-v-3e43b567="" class="rightBtn normal-btn button t_btn-d">
                                             长龙排行榜
                                         </button>
@@ -634,7 +667,7 @@
 
     @RenderPage("../Public/Prompt.cshtml")
 
-    
+
 
 
 

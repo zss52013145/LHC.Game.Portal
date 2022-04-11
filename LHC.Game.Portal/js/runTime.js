@@ -5,7 +5,7 @@ $(function () {
     setInterval("handTimeRun()", 1000);
 
     //更新期号 每分钟更新一次
-    setInterval('updateIssue()', 5000);  //新一期开奖之后 更新内容
+    //setInterval('updateIssue()', 5000);  //新一期开奖之后 更新内容
 
 
 
@@ -78,13 +78,15 @@ function handTimeRun() {
         return;
     }
 
-    //重新开始投注
-    if (lType == 11) { //带小时的
-        timeRun2();
-    }
-    else {
-        timeRun();
-    }
+    ////重新开始投注
+    //if (lType == 11) { //带小时的
+    //    timeRun2();
+    //}
+    //else {
+    //    timeRun();
+    //}
+
+    timeRun2();
 
 }
 
@@ -436,5 +438,5 @@ function handIssueLength(issueCount, lType) {
 //5s和35s的时候更新时间
 function updateTime() {
 
-    InitIssueAndTime();
+    //InitIssueAndTime();           ---4-11
 }

@@ -19,6 +19,9 @@ var thisYearSX = '虎';
 
 var money = 0;
 
+
+var weijiemingxi1 = '';
+
 $(function () {
 
     lType = $('#lType').val();  //赋初始值
@@ -81,6 +84,25 @@ $(function () {
 
     BindelradioClick();                     //单式/复式/胆拖
 
+    BindelcheckboxClcik();                      //六肖 家禽 野兽选择
+
+    BindnotOpenDetailCLick();          //未结明细
+
+    BindweijieDetailCLick();            //未结明细-第二层
+
+
+    BindwjmxBackCLick();                //未结明细-第二层     返回按钮
+
+    BindFundDetailCLick();              //资金明细
+
+    BindtodaySettlementCLick();         //今日结算
+
+    BindhistoryReportCLick();           //历史报表
+
+    BindsettlementDetailCLick();                //今日结算详情
+
+    //setInterval('LoadLastBet();', 3000);
+
 });
 
 
@@ -130,7 +152,169 @@ function Init() {
 
 
 
+    //期号 时间
+    $.post('/lottery/GetCurrentIssueAndTime', { lType: lType }, function (data) {
+
+        if (data != '已封盘') {
+
+            $('.c_time').eq(0).hide();
+            $('.c_time').eq(1).show();
+
+
+            var arr = data.split('|');
+
+
+            //1.
+            $('#nextIssue').html(arr[0]);
+
+
+            //2.2时:7分:22秒
+            var arr2 = arr[1].split('&');
+            var fengpantime = '<i id="hour">' + parseInt(arr2[0]) + '</i>时:<i id="minute">' + parseInt(arr2[1]) + '</i>分:<i id="second">' + parseInt(arr2[2]) + '</i>秒';
+            $('#fenpanTime').html(fengpantime);
+
+            //3.
+            var arr3 = arr[2].split('&');
+            $('#openTime').html('<span data-v-eb4ccf6e="" class="tx"><i id="second2">' + parseInt(arr3[2]) + '</i>秒</span><span data-v-eb4ccf6e="" class="tx"><i id="minute2">' + parseInt(arr3[1]) + '</i>分:</span><span data-v-eb4ccf6e="" class="tx"><i id="hour2">' + parseInt(arr3[0]) + '</i>时:</span><span data-v-eb4ccf6e="" class="tx" style="color: black;">&nbsp;距开奖:</span>');
+
+        }
+
+    })
+
+
 }
+
+
+
+
+
+function BindsettlementDetailCLick() {
+    $('#settlementDetail').live('click', function () {
+
+        $.post('/record/TodaySettlementDetail', { lType: lType }, function (data) {
+            $('#messageBox').html(data).show();
+        })
+    })
+}
+
+
+function BindtodaySettlementCLick() {
+    $('#todaySettlement').click(function () {
+
+        $.post('/record/todaySettlement', { lType: lType }, function (data) {
+            $('#messageBox').html(data).show();
+        })
+    })
+}
+
+function BindhistoryReportCLick() {
+    $('#historyReport').click(function () {
+
+        $.post('/record/historyReport', function (data) {
+            $('#messageBox').html(data).show();
+        })
+    })
+}
+
+
+
+
+function BindFundDetailCLick() {
+    $('#fundDetail').click(function () {
+
+        $.post('/record/fundDetail', function (data) {
+            $('#messageBox').html(data).show();
+        })
+    })
+}
+
+
+
+
+function BindwjmxBackCLick() {
+    $('#wjmxBack').live('click', function () {
+
+        $('#messageBox').html(weijiemingxi1);
+
+    })
+}
+
+
+function BindweijieDetailCLick() {
+    $('.weijieDetail').live('click', function () {
+
+        var cid = $(this).attr('cid');
+
+        weijiemingxi1 = $('#messageBox').html();  //保留第一层数据
+
+        $.post('/lottery/NotOpenRecordDetail', { lType: cid }, function (data) {
+
+            $('#messageBox').html(data);
+        })
+    })
+}
+
+
+function BindnotOpenDetailCLick() {
+    $('#notOpenDetail').click(function () {
+
+        $.post('/lottery/NotOpenRecord', { lType: lType }, function (data) {
+            $('#messageBox').html(data).show();
+        })
+    })
+}
+
+function LoadLastBet() {
+
+    $('.current-list li').remove();
+
+    $.post('/lottery/LastBetRecord', { lType: lType }, function (data) {
+        $('.current-list').append(data);
+    })
+}
+
+
+function BindelcheckboxClcik() {
+
+    $('.el-checkbox:visible').live('click', function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+
+        $(this).toggleClass('is-checked');
+        $(this).find('.el-checkbox__input').toggleClass('is-checked');
+
+
+        var index = $('.el-checkbox:visible').index($(this));
+
+
+        if (index == 0) {
+            $('.g_s-item i').eq(1).toggleClass('active');
+            $('.g_s-item i').eq(6).toggleClass('active');
+            $('.g_s-item i').eq(7).toggleClass('active');
+            $('.g_s-item i').eq(9).toggleClass('active');
+            $('.g_s-item i').eq(10).toggleClass('active');
+            $('.g_s-item i').eq(11).toggleClass('active');
+        }
+        else {
+            $('.g_s-item i').eq(0).toggleClass('active');
+            $('.g_s-item i').eq(2).toggleClass('active');
+            $('.g_s-item i').eq(3).toggleClass('active');
+            $('.g_s-item i').eq(4).toggleClass('active');
+            $('.g_s-item i').eq(5).toggleClass('active');
+            $('.g_s-item i').eq(8).toggleClass('active');
+
+        }
+
+
+
+    });
+
+
+}
+
+
 
 function BindelradioClick() {
 
@@ -177,6 +361,9 @@ function BindconfirmBetClick() {
 
 
                 ShowTanMin('恭喜您，下注成功！');
+
+                LoadLastBet();
+
             }
         });
     })
@@ -719,6 +906,9 @@ function BindbetResetClick() {
         $('.g_s-item:visible').find('i').removeClass('active');
 
         $('.g_dantuo_img:visible').remove();            //胆码
+
+        //六肖、
+        $('.el-checkbox,.el-checkbox__input').removeClass('is-checked');
 
         danMaCount = 0;
 
@@ -2076,22 +2266,6 @@ function BindopenResultClick() {
 }
 
 
-//错误弹窗
-function ShowTanMin(msg) {
-    $('.message__content').html(msg);
-    $('.notification').fadeIn(500);
-
-    setTimeout("$('.notification').fadeOut(500);", 2000);
-}
-
-
-//错误弹窗2
-function ShowTanMin2(msg) {
-    $('.el-message__content').html(msg);
-    $('.notification2').fadeIn(500);
-
-    setTimeout("$('.notification2').fadeOut(500);", 2000);
-}
 
 
 
@@ -2491,7 +2665,7 @@ function LoadPeiLV() {
                             }
                         }
 
-                     
+
                     }
                 }
                 else {

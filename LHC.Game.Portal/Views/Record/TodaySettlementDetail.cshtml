@@ -1,0 +1,79 @@
+﻿@using ShenZhen.Lottery.Model
+
+
+
+<div data-v-3b9d91bc="" data-v-70a5c976="" class="dialog_wrap dialog" style="">
+    <div data-v-3b9d91bc="" class="dialog" style="min-height: 500px;" flag="true">
+        <div data-v-3b9d91bc="" class="t_b-c dialog_title" style="cursor: move;">
+            今日已结
+      <a data-v-3b9d91bc="" href="javascript:;" class="dialog_close"></a>
+
+        </div>
+
+        <div data-v-3b9d91bc="" class="dialog_content" style="min-height: 500px;">
+
+            <ul data-v-70a5c976="" data-v-3b9d91bc="" class="table-list">
+                <!---->
+                <!---->
+
+                <li data-v-70a5c976="" data-v-3b9d91bc="" class="qc-16">
+
+                    <div data-v-c187c242="" data-v-70a5c976="" class="table-wrap table-w" data-v-3b9d91bc="">
+
+                        <table data-v-c187c242="" class="table">
+
+                            <tr data-v-c187c242="">
+                                <th data-v-c187c242="">订单号</th>
+                                <th data-v-c187c242="">时间</th>
+                                <th data-v-c187c242="">期号</th>
+                                <th data-v-c187c242="">类型</th>
+                                <th data-v-c187c242="">赔率</th>
+                                <th data-v-c187c242="">投注金额</th>
+                                <th data-v-c187c242="">退水</th>
+                                <th data-v-c187c242="">输赢</th>
+
+                            </tr>
+
+
+                            @foreach (BettingRecord r in ViewBag.list)
+                            {
+                                var betMoney = r.BetCount * r.UnitMoney;
+                                
+                                <tr data-v-c187c242="">
+                                    <td data-v-c187c242="">@r.Id</td>
+                                    <td data-v-c187c242="">@r.ShowTime</td>
+                                    <td data-v-c187c242="">@r.Issue</td>
+                                    <td data-v-c187c242="">
+                                        <span data-v-70a5c976="" data-v-c187c242="">@r.PlayName</span> <span data-v-70a5c976="" data-v-c187c242="" class="blue">@r.BetNum</span>
+                                    </td>
+                                    <td data-v-c187c242="">
+                                        <span data-v-70a5c976="" data-v-c187c242="">@r.Peilv</span>
+                                    </td>
+                                    <td data-v-c187c242="">@betMoney</td>
+                                    <td data-v-c187c242="">@r.TuiShui</td>
+                                    <td data-v-c187c242="">
+
+                                        @if (r.ShuYing > 0)
+                                        {
+                                            <span data-v-70a5c976="" data-v-c187c242="" style="color: red;">@r.ShuYing</span>
+
+                                        }
+                                        else
+                                        {
+                                            <span data-v-70a5c976="" data-v-c187c242="" style="color: green;">@r.ShuYing</span>
+                                        
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                            <!---->
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -108,6 +108,8 @@
     <Compile Include="Controllers\BettingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LotteryController.cs" />
+    <Compile Include="Controllers\RecordController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +237,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Public\ConfirmOrder.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Lottery\LastBetRecord.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Lottery\NotOpenRecord.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Lottery\NotOpenRecordDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Record\FundDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Record\HistoryReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Record\TodaySettlement.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Record\TodaySettlementDetail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

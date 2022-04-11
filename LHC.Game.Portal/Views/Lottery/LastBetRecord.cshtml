@@ -1,0 +1,43 @@
+﻿@using ShenZhen.Lottery.Model
+
+@foreach (BettingRecord record in ViewBag.list)
+{
+
+    int m = record.UnitMoney * record.BetCount;
+
+    string peilv = record.Peilv + "";
+
+    while (peilv.Contains('.') && peilv.EndsWith("0"))
+    {
+
+        peilv = peilv.TrimEnd('0');
+    }
+
+    if (peilv.EndsWith("."))
+    {
+        peilv = peilv.TrimEnd('.');
+
+    }
+    
+    
+    
+    <li data-v-5f2813ea="" class="current-item">
+
+        <h3 data-v-5f2813ea="" class="item-title">
+
+            <span data-v-5f2813ea="" class="name">@ViewBag.lTypeName</span>
+
+            <span data-v-5f2813ea="" class="money tc">@m</span>
+
+        </h3>
+
+        <p data-v-5f2813ea="" class="item-content">
+            @record.PlayName,
+            @record.BetNum,
+            @peilv
+        </p>
+
+
+    </li>
+}
+

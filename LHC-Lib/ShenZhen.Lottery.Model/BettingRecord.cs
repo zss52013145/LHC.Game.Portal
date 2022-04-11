@@ -228,29 +228,16 @@ namespace ShenZhen.Lottery.Model
 
 
 
-        public string ShuYing
+        public decimal ShuYing
         {
             get
             {
-                decimal result = 0;
-
                 if (this.WinState > 2)
                 {
-                    //result = this.WinMoney + this.TuiShui - (this.BetCount * this.UnitMoney);
-                    result = this.SY;
+                    return this.WinMoney + this.TuiShui - (this.BetCount * this.UnitMoney);
                 }
 
-                string str = "";
-                if (result >= 0)
-                {
-                    str = "<font style='color: #00b939;'>" + result + "</font>";
-                }
-                else
-                {
-                    str = "<font style='color: red;'>" + result + "</font>";
-                }
-
-                return str;
+                return 0;
             }
         }
 

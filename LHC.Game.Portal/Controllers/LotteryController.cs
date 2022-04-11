@@ -162,5 +162,101 @@ namespace LHC.Game.Portal.Controllers
         }
 
 
+        /// <summary>
+        /// 最新注单
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LastBetRecord(int lType)
+        {
+            string sql = "select top(10)* from BettingRecord where lType = " + lType + " order by Id desc";
+
+            List<BettingRecord> list = Util.ReaderToList<BettingRecord>(sql);
+
+            ViewBag.list = list;
+
+
+            ViewBag.lTypeName = Util.GetlTypeName(lType);
+
+            return View();
+
+        }
+
+
+
+        //当前期号和时间
+        public ActionResult GetCurrentIssueAndTime(int lType)
+        {
+
+            string time1 = Util5.GetRemainingTime(lType);
+
+            if (time1 == "已封盘")
+            {
+                return Content("已封盘");
+
+            }
+            else
+            {
+
+                string issue = Util5.GetCurrentIssue(lType);
+
+                string time2 = Util5.GetOpenRemainingTime(lType);
+
+                string result = issue + "|" + time1 + "|" + time2;
+
+                return Content(result);
+
+            }
+
+        }
+
+
+        //未结明细1
+        public ActionResult NotOpenRecord(int lType)
+        {
+            string sql = "select count(1) from BettingRecord where lType = 1 and WinState = 1";
+            int count1 = Util.GetCountByDataBase(sql);
+
+            sql = "select sum(betcount*unitmoney) from BettingRecord where lType = 1 and WinState = 1";
+            int m1 = Util.GetCountByDataBase(sql);
+
+
+            sql = "select count(1) from BettingRecord where lType = 3 and WinState = 1";
+            int count2 = Util.GetCountByDataBase(sql);
+
+            sql = "select sum(betcount*unitmoney) from BettingRecord where lType = 3 and WinState = 1";
+            int m2 = Util.GetCountByDataBase(sql);
+
+
+            ViewBag.count1 = count1;
+            ViewBag.m1 = m1;
+            ViewBag.count2 = count2;
+            ViewBag.m2 = m2;
+
+            return View();
+
+        }
+
+
+
+
+        public ActionResult NotOpenRecordDetail(int lType)
+        {
+
+            string sql = "select * from BettingRecord where lType = " + lType + " and WinState = 1";
+            ViewBag.list = Util.ReaderToList<BettingRecord>(sql);
+
+
+            sql = "select sum(betcount*unitmoney) from BettingRecord where lType = " + lType + " and WinState = 1";
+            int m1 = Util.GetCountByDataBase(sql);
+
+
+            ViewBag.m1 = m1;
+
+            ViewBag.lTypeName = Util.GetlTypeName(lType);
+
+            return View();
+
+        }
+
     }
 }

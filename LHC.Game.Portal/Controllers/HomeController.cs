@@ -17,6 +17,21 @@ namespace LHC.Game.Portal.Controllers
         public ActionResult Index(int id = 3)
         {
             ViewBag.lType = id;
+            
+            string sql = "select sum(betcount*unitmoney) from BettingRecord where WinState = 1";
+
+            ViewBag.weijieMoney = Util.GetCountByDataBase(sql); //未结金额
+
+
+            //今日输赢
+
+            string date = DateTime.Now.ToString("yyyy-MM-dd");
+            string time1 = date + " 0:0:0";
+            string time2 = date + " 23:59:0";
+
+            sql = "select sum( winMoney + tuishui -   betcount*unitmoney) from BettingRecord where WinState <> 1 and  SubTime > '" + time1 + "' and  SubTime <'" + time2 + "'";
+
+            ViewBag.todaySY = Util.GetCountByDataBase3(sql); 
 
             return View();
         }

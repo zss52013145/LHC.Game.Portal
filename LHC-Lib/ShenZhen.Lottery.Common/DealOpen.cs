@@ -334,7 +334,18 @@ namespace ShenZhen.Lottery.Common
                     else
                     {
                         string shengxiao = Util.GetShengxiaoByDigit(tema);
-                        if (betNum.Contains(shengxiao)) winCount++;
+                        //if (betNum.Contains(shengxiao)) winCount++;
+
+                        if (betNum.Contains(shengxiao)) {
+                        
+                           //从剩下的号码中取出5个号码 组成一注
+
+                            int len = betNum.Split(',').Length - 1;
+
+                            winCount = JieCheng(len) / (JieCheng(len - 5) * JieCheng(5));
+
+                        }
+
                     }
                 }
                 else if (playName == "一粒任中")
