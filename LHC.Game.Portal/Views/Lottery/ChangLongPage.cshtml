@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+
+    //Dictionary<string, int> dic = ViewBag.data;
+    
+}
+
+<div data-v-40fe881d="" data-v-3e43b567="" class="sta-table-1" id="clpage">
+    <div data-v-c187c242="" data-v-40fe881d="" class="table-wrap table-queue">
+        <table data-v-c187c242="" class="table">
+            <tr data-v-c187c242="">
+                <th data-v-c187c242="">长龙类型</th>
+                <th data-v-c187c242="">期数</th>
+            </tr>
+
+            @foreach (var d in ViewBag.data)
+            {
+                string s = d.Value + "期";
+                
+                <tr data-v-c187c242="">
+                    <td data-v-c187c242="">
+                        <span data-v-40fe881d="" data-v-c187c242="">@d.Key</span>
+                    </td>
+                    <td data-v-c187c242="">
+                        <span data-v-40fe881d="" data-v-c187c242="">@s</span>
+                    </td>
+                </tr>
+            }
+
+
+
+            <!---->
+        </table>
+    </div>
+</div>

@@ -1,0 +1,230 @@
+﻿@using ShenZhen.Lottery.Public
+@using ShenZhen.Lottery.Model
+
+@{
+    Layout = null;
+
+    string title = "开奖结果-" + ViewBag.lTypeName;
+}
+
+
+<div data-v-3b9d91bc="" data-v-1c351db0="" class="dialog_wrap" style="">
+    <div data-v-3b9d91bc="" class="dialog" style="min-height: 500px;" flag="true">
+        <div data-v-3b9d91bc="" class="t_b-c dialog_title" style="cursor: move;">
+            @title
+            <a data-v-3b9d91bc="" href="javascript:;" class="dialog_close"></a>
+        </div>
+        <div data-v-3b9d91bc="" class="dialog_content" style="min-height: 500px;">
+
+            <div data-v-1c351db0="" data-v-3b9d91bc="" class="datePicker">
+                <div data-v-1c351db0="" class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange el-range-editor--small" data-v-3b9d91bc="">
+                    <i class="el-input__icon el-range__icon el-icon-date"></i>
+                    <input autocomplete="off" placeholder="开始日期" name="" class="el-range-input">
+                    <span class="el-range-separator">至</span>
+                    <input autocomplete="off" placeholder="结束日期" name="" class="el-range-input">
+                    <i class="el-input__icon el-range__close-icon"></i>
+                </div>
+                <span data-v-1c351db0="" data-v-3b9d91bc="" class="item m10 search t_b-c">查 询</span>
+            </div>
+
+            <div data-v-c187c242="" data-v-1c351db0="" class="table-wrap" style="min-height: 200px;" data-v-3b9d91bc="">
+                <table data-v-c187c242="" class="table">
+                    <tr data-v-c187c242="">
+                        <th data-v-c187c242="">期数</th>
+                        <th data-v-c187c242="">开奖日期</th>
+                        <th data-v-c187c242="">开奖号码</th>
+                        <th data-v-c187c242="">特码</th>
+                        <th data-v-c187c242="">生肖</th>
+                        <th data-v-c187c242="">尾数</th>
+                        <th data-v-c187c242="">总数</th>
+                    </tr>
+
+                    @foreach (LotteryRecord lr in ViewBag.list)
+                    {
+                        <tr data-v-c187c242="">
+                            <td data-v-c187c242="">
+                                <span data-v-1c351db0="" data-v-c187c242="" class="number">@lr.Issue</span>
+                            </td>
+                            <td data-v-c187c242="">@lr.ShowTime</td>
+                            <td data-v-c187c242="">
+                                <ul data-v-1c351db0="" data-v-c187c242="" slot="recodeNumber" class="lh_num_record">
+
+
+                                    @foreach (string s in lr.Num.Split(','))
+                                    {
+
+                                        string color = "numberlhc number-" + Util.GetColor(s);
+                                        
+                                        <li data-v-1c351db0="" data-v-c187c242="" class="item lh_item">
+                                            <span data-v-1c351db0="" data-v-c187c242="" class="@color">@s</span>
+                                        </li>
+                                    }
+
+
+
+
+                                    @foreach (string s in lr.ShowShengXiao.Split(' '))
+                                    {
+                                        <li data-v-1c351db0="" data-v-c187c242="" class="item lh_item">
+                                            <span data-v-1c351db0="" data-v-c187c242="" class="numberlhc banbo-yellow">@s</span>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </td>
+                            <td data-v-c187c242="">
+                                <div data-v-1c351db0="" data-v-c187c242="">
+
+
+                                    @{
+                                    string[] arr = lr.ShowTeMa.Split(' ');
+
+                                    if (arr[0].Contains("小"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">小 </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">大 </span>
+                                    }
+
+
+                                    if (arr[1].Contains("单"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">单 </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">双 </span>
+                                    }
+
+                                    if (arr[2].Contains("小"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">尾小 </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">尾大 </span>
+                                    }
+
+
+                                    if (arr[3].Contains("小"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">合小 </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">合大 </span>
+                                    }
+
+                                    if (arr[4].Contains("单"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">合单 </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">合双 </span>
+                                    }
+
+                                    if (arr[5].Contains("野"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">野禽 </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">家禽 </span>
+                                    }
+
+
+                                    if (arr[6].Contains("蓝"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">蓝波 </span>
+                                    }
+                                    else if (arr[6].Contains("红"))
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">红波 </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha green">绿波 </span>
+                                    }
+                                            
+                                    }
+
+
+                                </div>
+                            </td>
+                            <td data-v-c187c242="">@lr.ShengXiaoCount</td>
+                            <td data-v-c187c242="">@lr.WeiShuCount</td>
+                            <td data-v-c187c242="">
+                                <div data-v-1c351db0="" data-v-c187c242="">
+
+                                    @{
+                                    arr = lr.SumInfo.Split(' ');
+
+                                    int sum = int.Parse(arr[0]);
+
+                                    if (sum <= 174)
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">@sum  </span>
+                                            
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">总小  </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">@sum  </span>
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">总大  </span>
+                                            
+                                            
+                                    }
+
+
+                                    if (sum % 2 != 0)
+                                    { 
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">总单  </span>
+                                    }
+                                    else
+                                    {
+                                        <span data-v-1c351db0="" data-v-c187c242="" class="cha red">总双  </span>
+                                            
+                                    }
+                                            
+                                    }
+
+
+
+
+                                    <span data-v-1c351db0="" data-v-c187c242="" class="cha blue">总单  </span>
+                                    <span data-v-1c351db0="" data-v-c187c242="" class="cha blue"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+
+
+
+                    <!---->
+                </table>
+            </div>
+            @*<div data-v-1c351db0="" class="el-pagination el-pagination--small" data-v-3b9d91bc="">
+                    <button type="button" disabled="disabled" class="btn-prev">
+                        <i class="el-icon el-icon-arrow-left"></i>
+                    </button>
+                    <ul class="el-pager">
+                        <li class="number active">1</li>
+                        <!---->
+                        <li class="number">2</li>
+                        <li class="number">3</li>
+                        <li class="number">4</li>
+                        <!---->
+                        <li class="number">5</li>
+                    </ul>
+                    <button type="button" class="btn-next">
+                        <i class="el-icon el-icon-arrow-right"></i>
+                    </button>
+                </div>*@
+        </div>
+    </div>
+</div>
+

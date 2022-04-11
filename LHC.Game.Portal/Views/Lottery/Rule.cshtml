@@ -1,0 +1,758 @@
+﻿@{
+    string title = "游戏规则-" + ViewBag.lTypeName;
+
+
+    string intro = "该游戏的投注时间、开奖时间和开奖号码与“" + ViewBag.lTypeName + "”完全同步（官方网）";
+    
+}
+
+
+<div data-v-3b9d91bc="" data-v-dbb2bac4="" class="dialog_wrap" style="">
+    <div data-v-3b9d91bc="" class="dialog" style="min-height: 500px;">
+        <div data-v-3b9d91bc="" class="t_b-c dialog_title">
+            @title
+            <a data-v-3b9d91bc="" href="javascript:;" class="dialog_close"></a>
+        </div>
+        <div data-v-3b9d91bc="" class="dialog_content" style="min-height: 500px;">
+            <div data-v-dbb2bac4="" data-v-3b9d91bc="" class="title">@intro</div>
+            <ul data-v-dbb2bac4="" data-v-3b9d91bc="" class="list">
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>以下所有投注皆含本金。
+                    </p>
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                    </p>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>特别号码：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">六合彩公司当期开出的最后一码为特码</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">特码逢双为特双，特码逢单为特单，49号为和局</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">特码(01~24)为小；特码(25~48)为大。49号为和局</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">两面（指大、小、单、双、合双合单、合大合小、家禽、野兽、六肖、尾数大小）。49号为和局</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">特码合数大小：以特码个位和十位数字总和来判断胜负，和数大于或等于7为大，小于或等于6为小，开出49号为和。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">特码合数单双：以特码个位和十位数字总和来判断单双，如01，12，32为和单，02，11，33为和双，开出49号为和。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">特码尾数大小：以特别号尾数若0尾~4尾为小、5尾~9尾为大；如01、32、44为特尾小；如05、18、19为特尾大，开出49号为和</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">家禽【牛－马－羊－鸡－狗－猪－】</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">野兽【鼠－虎－兔－龙－蛇－猴－】</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>正码：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">六合彩公司当期开出之前6个号码叫正码。第一时间出来的叫正码1，依次叫正码2、正码3……正码6，不以大小排序。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>总分大小：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">所有七个开奖号码的分数总和大於或等於175为总分大；分数总和小於或等於174为总分小。如开奖号码为01、07、15、29、38、46、24，分数总和是160，为总分小。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>总分单双：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">所有七个开奖号码的分数总和是单数叫总分单(总单)，如分数总和是103、193；分数总和是双数叫总分双(总双)，如分数总和是108、160 特码单双：特码为双数叫特双，如2、18；特码为单数叫特单，如17、33</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>正特:
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">正1特、正2特、正3特、正4特、正5特、正6特:指其下注的正码特号与开出之正码其开奖顺序及开奖号码相同，视为中奖，如现场摇珠第一个正码开奖为49号，下注正1特为49则视为中奖，其它号码视为不中奖，，其他正特项目依此类推。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">大小单双和特别号码的大小单双等规则相同</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>波色：指开出特码所属的颜色
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">红色号码包括：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="red">01，02，07，08，12，13，18，19，23，24，29，30，34，35，40，45，46。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">蓝色号码包括：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="blue">03，04，09，10，14，15，20，25，26，31，36，37，41，42，47，48。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">绿色号码包括：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="green">05，06，11，16，17，21，22，27，28，32，33，38，39，43，44，49 。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>特肖首尾:
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">特肖指开奖的第7个号码（特别号码）是所属投注生肖的号码，就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">特尾是指开奖的第7个号码（特别号码）是所属投注尾数的号码，就算中奖，例如投注特尾1尾，只要特码是开1 11 21 31 41其中一个就算中奖。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>头数：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">1-9为0头,1-9为0头,10-19为1头，20-29为2头，30-39为3头，40-49为4头，开奖的第7个号码（特别号码）是所属头数的号码，就算中奖。例如投注0头，特码只要开1-9的其中一个号码就算中奖。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>一肖尾数:
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">一肖中：挑选1个生肖(排列如同生肖)投注，若开奖号码的正码和特码在此生肖组合内 ，即视为中奖；重复开出来的也只计算一次中奖！</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">一肖不中：挑选1个生肖(排列如同生肖)投注，若开奖号码的正码和特码不在此生肖组合内 ，即视为中奖；重复开出来的也只计算一次中奖！</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">尾数中：开出的正码和特别号码中含有所属尾数的号码，就算中奖号码，重复开出来的也只计算一次中奖！</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">尾数不中：开出的正码和特别号码中不含有所属尾数的号码，就算中奖号码，重复开出来的也只计算一次中奖！</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>连肖：（生肖的所对应的号码和特码生肖项目的一样，一个生肖的对应多个号码，无论同生肖的号码出现一个或多个，派彩只一次。每个生肖都有自己的赔率，下注组合的总赔率。取该组合生肖的最低赔率为总赔率。
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">二肖连[ 中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择两个生肖为一投注组合进行投注。该投注的两个生肖必须在当期开出的7个开奖号码相对应的生肖中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">三肖连[ 中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择三个生肖为一投注组合进行投注。该投注的三个生肖必须在当期开出的7个开奖号码相对应的生肖中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">四肖连[ 中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择四个生肖为一投注组合进行投注。该投注的四个生肖必须在当期开出的7个开奖号码相对应的生肖中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">五肖连[ 中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择五个生肖为一投注组合进行投注。该投注的五个生肖必须在当期开出的7个开奖号码相对应的生肖中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">二肖连[ 不中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择二个生肖为一投注组合进行投注。该投注的二个生肖必须都不在当期开出的7个开奖号码相对应的生肖中，视为中奖 。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">三肖连[ 不中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择三个生肖为一投注组合进行投注。该投注的三个生肖必须都不在当期开出的7个开奖号码相对应的生肖中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">四肖连[ 不中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择四个生肖为一投注组合进行投注。该投注的四个生肖必须都不在当期开出的7个开奖号码相对应的生肖中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">五肖连[ 不中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择五个生肖为一投注组合进行投注。该投注的五个生肖必须都不在当期开出的7个开奖号码相对应的生肖中，视为中奖。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>连尾：（尾数的所对应的号码和特码尾数项目的一样，一个尾数的对应多个号码，无论同尾数的号码出现一个或多个，派彩只一次。每个尾数都有自己的赔率，下注组合的总赔率。取改组合尾数的最低赔率为总赔率。
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">二尾连[ 中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择两个尾数为一投注组合进行投注。该投注的两个尾数必须在当期开出的7个开奖号码相对应的尾数中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">三尾连[ 中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择三个尾数为一投注组合进行投注。该投注的三个尾数必须在当期开出的7个开奖号码相对应的尾数中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">四尾连[ 中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择四个尾数为一投注组合进行投注。该投注的四个尾数必须在当期开出的7个开奖号码相对应的尾数中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">二尾连[ 不中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择二个尾数为一投注组合进行投注。该投注的二个尾数必须都不在当期开出的7个开奖号码相对应的尾数中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">三尾连[ 不中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择三个尾数为一投注组合进行投注。该投注的三个尾数必须都不在当期开出的7个开奖号码相对应的尾数中，视为中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">四尾连[ 不中 ]：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择四个尾数为一投注组合进行投注。该投注的四个尾数必须都不在当期开出的7个开奖号码相对应的尾数中，视为中奖。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>连码：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">三全中：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">每三号码为一组合，若三个号码都是开奖号码之正码，视为中奖，其余情形视为不中奖。如03、04、05三个都是开奖号码之正码，视为中奖，如两个正码加上一个特别号码，视为不中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">三中二：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">所投注的每三个号码为一组合，若其中2个是开奖号码中的正码，视为中奖，叫三中二；若3个都是开奖号码中的正码，叫三中二之中三，其余情形视为不中奖，如03、04、05为一组合，开奖结果中有03、04两个正码，没有05，叫三中二，按三中二赔付；如开奖中有03、04、05三个正码，叫三中二之中三，按中三赔付；如出现1个或没有，视为不中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">二全中：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">每二个号码为一组合，二个号码都是开奖号码之正码，视为中奖，其余情形视为不中奖（含一个正码加一个特别号码之情形）。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">二中特：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">二中特.中二就是中了两个正码视为中二.中特:一个中特一个正码.算为中 特。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">特 串：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">每二个号码为一组合，其中一个是正码，一个是特别号码，视为中奖，其余情形视为不中奖（含二个号码都是正码之情形）  。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">依照二全中•二中特•特串 此3种玩法规则,来进行‘生肖对碰’或‘尾数对碰’及混合对碰。例一：选择‘二全中’,之后进行‘生肖对碰’选择猪(2，14，26，38)以及鼠 (1，13，25，37，49)则会产生20组号码组合：[2,1] [2,13] [2,25] [2,37] [2,49][14,1] [14,13] [14,25] [14,37] [14,49][26,1] [26,13] [26,25] [26,37] [26,49][38,1] [38,13] [38,25] [38,37] [38,49]  。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">例二：选择‘二中特’,之后进行‘尾数对碰’选择0(10，20，30，40)以及5(5，15，25，35，45)则会产生20组号码组合：[10,5] [10,15] [10,25] [10,35] [10,45][20,5] [20,15] [20,25] [20,35] [20,45][30,5] [30,15] [30,25] [30,35] [30,45][40,5] [40,15] [40,25] [40,35] [40,45]•	例三：•	选择特串：之后选择混合对碰，选择鼠（01， 13 ，25， 37 ，49）碰1尾（1，11，21，341，41），则会产生24组号码组合：[1,11] [1,21] [1,31] [1,41][13,1] [13,11] [13,21] [13,31] [13,41][25,1] [25,11] [25,21] [25,31] [25,41][37,1] [37,11] [37,21] [37,31] [37,41][49,1] [49,11] [49,21] [49,31] [49,41]</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>自选不中：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">五不中：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选5个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">六不中</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选6个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">七不中</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选7个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">八不中</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选8个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">九不中</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选9个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">十不中</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选10个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">十一不中</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选11个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">十二不中</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选2个号码为一个组合下注，如果开奖的七个号码（正码与特码）不是这组合的号码就算中奖。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>总肖：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">2肖：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">投注2肖，如果开奖的七个号码（正码与特码）对应的生肖总数和刚好是2个就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">3肖：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">投注3肖，如果开奖的七个号码（正码与特码）对应的生肖总数和刚好是3个就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">4肖：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">投注4肖，如果开奖的七个号码（正码与特码）对应的生肖总数和刚好是4个就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">5肖：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">投注5肖，如果开奖的七个号码（正码与特码）对应的生肖总数和刚好是5个就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">6肖：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">投注6肖，如果开奖的七个号码（正码与特码）对应的生肖总数和刚好是6个就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">7肖：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">投注7肖，如果开奖的七个号码（正码与特码）对应的生肖总数和刚好是7个就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">总肖单 ：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">如果开奖的七个号码（正码与特码）对应的生肖总数和是单就算中奖。</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">总肖双 ：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">如果开奖的七个号码（正码与特码）对应的生肖总数和是双就算中奖。</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>合肖：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选2-6生肖(排列如同生肖)为一个组合，若开奖号码的特码亦在此组合内 ，即视为中奖；选择投注6肖，如果特码开49打和</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>特平中：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">选择1至5个号码为一个投注组合，如果开奖号码的正码与特码亦在此组合内 ，即视为中奖；重复开出也只计算一次中奖</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>中一：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">挑选4-10个号码为一投注组合，若开奖号码的正码和特码有一个号码在其中视为中奖</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>半波：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">以特码色波和特单，特双，特大，特小为一个投注组合，当期特码开出符合投注组合，即视为中奖。 开49则算打和</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+                <li data-v-dbb2bac4="" data-v-3b9d91bc="" class="item clear_fix">
+                    <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                        <i data-v-dbb2bac4="" data-v-3b9d91bc="" class="before tbc"></i>五行：
+                    </p>
+                    <ol data-v-dbb2bac4="" data-v-3b9d91bc="">
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">当期开出的特码号为所属五行中的号码即为中奖：例如选择投注金，只要特码是开01，06，11，16，21，26，31，36，41，46其中一个号码就算中奖。开49不打和</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">金：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">01，06，11，16，21，26，31，36，41，46</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">木：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">02，07，12，17，22，27，32，37，42，47</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">水：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">03，08，13，18，23，28，33，38，43，48</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">火：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">04，09，14，19，24，29，34，39，44，49</span>
+                            </p>
+                        </li>
+                        <li data-v-dbb2bac4="" data-v-3b9d91bc="">
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="c_before">
+                            </p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="label">土：</p>
+                            <p data-v-dbb2bac4="" data-v-3b9d91bc="" class="value">
+                                <span data-v-dbb2bac4="" data-v-3b9d91bc="" class="">05，10，15，20，25，30，35，40，45</span>
+                            </p>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

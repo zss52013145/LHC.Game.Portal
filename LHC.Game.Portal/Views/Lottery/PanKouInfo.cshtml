@@ -1,0 +1,50 @@
+﻿@using ShenZhen.Lottery.Model
+
+@{
+    UserInfo user = ViewBag.user;
+}
+
+<div data-v-3b9d91bc="" data-v-c20e9a26="" class="dialog_wrap d_wrap" style="">
+    <div data-v-3b9d91bc="" class="dialog" style="min-height: 500px;" flag="true">
+        <div data-v-3b9d91bc="" class="t_b-c dialog_title" style="cursor: move;">
+            个人信息
+      <a data-v-3b9d91bc="" href="javascript:;" class="dialog_close"></a>
+        </div>
+        <div data-v-3b9d91bc="" class="dialog_content" style="min-height: 500px;">
+            <p data-v-c20e9a26="" data-v-3b9d91bc="" class="user">
+                <span data-v-c20e9a26="" data-v-3b9d91bc="" class="label">账号：</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="text">@user.UserName (@user.NickName)</span>
+            </p>
+            <p data-v-c20e9a26="" data-v-3b9d91bc="">
+                <span data-v-c20e9a26="" data-v-3b9d91bc="" class="label">总额：</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="text">@user.CreditLine</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="label">用户类型：</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="text">信用盘</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="label">盘口：</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="text">@user.PanKou</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="label">最低下注额：</span> <span data-v-c20e9a26="" data-v-3b9d91bc="" class="text">2</span>
+            </p>
+            <div data-v-c187c242="" data-v-c20e9a26="" class="table-wrap content" data-v-3b9d91bc="">
+                <table data-v-c187c242="" class="table">
+                    <tr data-v-c187c242="">
+                        <th data-v-c187c242="">彩种名称</th>
+                        <th data-v-c187c242="">交易类型</th>
+                        <th data-v-c187c242="">单注最高</th>
+                        <th data-v-c187c242="">单期限额</th>
+                        <th data-v-c187c242="">退水</th>
+                    </tr>
+
+
+                    @foreach (PlayInfo p in ViewBag.data)
+                    {
+                        <tr data-v-c187c242="">
+                            <td data-v-c187c242="">@p.ShowlTypeName</td>
+                            <td data-v-c187c242="">@p.PlayName</td>
+                            <td data-v-c187c242="">@p.MaxForOne</td>
+                            <td data-v-c187c242="">@p.MaxForAll</td>
+                            <td data-v-c187c242="">@p.TuiShui</td>
+                        </tr>
+                    }
+
+                    
+                    
+                    <!---->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
