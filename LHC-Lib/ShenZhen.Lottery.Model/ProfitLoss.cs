@@ -17,6 +17,8 @@ namespace ShenZhen.Lottery.Model
         public DateTime SubTime { get; set; }
 
         public int? OtherId { get; set; }
+        
+        public string Mark { get; set; }            //备注
 
 
         //扩展

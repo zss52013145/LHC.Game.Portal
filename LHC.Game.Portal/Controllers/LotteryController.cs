@@ -168,7 +168,10 @@ namespace LHC.Game.Portal.Controllers
         /// <returns></returns>
         public ActionResult LastBetRecord(int lType)
         {
-            string sql = "select top(10)* from BettingRecord where lType = " + lType + " order by Id desc";
+
+            string time = DateTime.Now.ToString("yyyy-MM-dd") + " 0:0:0";
+
+            string sql = "select top(10)* from BettingRecord where lType = " + lType + " and  SubTime> '" + time + "' order by Id desc";
 
             List<BettingRecord> list = Util.ReaderToList<BettingRecord>(sql);
 

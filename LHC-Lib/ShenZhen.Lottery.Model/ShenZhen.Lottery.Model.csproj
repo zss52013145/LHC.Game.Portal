@@ -53,6 +53,7 @@
     <Compile Include="ComeOutRecord.cs" />
     <Compile Include="DATA.cs" />
     <Compile Include="DateLine.cs" />
+    <Compile Include="DayReport.cs" />
     <Compile Include="DlReport.cs" />
     <Compile Include="Dzd.cs" />
     <Compile Include="FanShui.cs" />

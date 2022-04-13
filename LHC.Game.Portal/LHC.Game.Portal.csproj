@@ -259,6 +259,15 @@
   <ItemGroup>
     <Content Include="Views\Record\TodaySettlementDetail.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Record\Histrory2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Record\Histrory3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Record\Histrory4.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

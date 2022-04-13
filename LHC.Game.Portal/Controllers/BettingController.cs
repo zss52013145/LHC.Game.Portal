@@ -56,11 +56,11 @@ namespace LHC.Game.Portal.Controllers
 
 
 
-            ////判断单子的正确性 - 针对投注号码
-            //if (!Util.JudgeBetCorrect(lType, betInfo))
-            //{
-            //    return Content("数据错误");
-            //}
+            //判断单子的正确性 - 针对投注号码
+            if (!Util5.JudgeBetCorrect(lType,bigPlayName,smallPlayName, betInfo))
+            {
+                return Content("数据错误");
+            }
 
 
             string[] infoArr = betInfo.Split('|');  //一条表示一个单子
@@ -224,7 +224,9 @@ namespace LHC.Game.Portal.Controllers
                     sql += "update UserInfo set Money-=" + betMoney + " where Id=" + userId;
 
                     decimal currentMoney = Common.GetUserMoneyById(userId) - betMoney;
-                    sql += Util.GetProfitLossSql(userId, 1, -betMoney, currentMoney);
+
+                    string mark = "投注[" + Util.GetlTypeName(lType) + "]第[" + issue + "]期";
+                    sql += Util5.GetProfitLossSql(userId, 1, -betMoney, currentMoney, mark);
 
 
                     SqlHelper.ExecuteTransaction(sql, pms);

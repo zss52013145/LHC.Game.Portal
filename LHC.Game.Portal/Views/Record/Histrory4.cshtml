@@ -1,0 +1,109 @@
+﻿@using ShenZhen.Lottery.Model
+
+@{
+    LotteryRecord lr = ViewBag.lotteryRecord;
+
+    var title = "结算报表-" + lr.Issue + "期";
+    
+}
+
+
+<div data-v-3b9d91bc="" data-v-c402b53e="" class="dialog_wrap dialog" style="">
+    <div data-v-3b9d91bc="" class="dialog" style="min-height: 500px;" flag="true">
+        <div data-v-3b9d91bc="" class="t_b-c dialog_title" style="cursor: move;">
+            @title
+            <a data-v-3b9d91bc="" href="javascript:;" class="dialog_close"></a>
+        </div>
+        <div data-v-3b9d91bc="" class="dialog_content" style="min-height: 500px;">
+            <div data-v-c402b53e="" data-v-3b9d91bc="" class="date clearBoth">
+            </div>
+            <div data-v-c402b53e="" data-v-3b9d91bc="" class="wrap">
+                <p data-v-c402b53e="" data-v-3b9d91bc="" style="line-height: 40px; text-align: right;">
+                    <a data-v-c402b53e="" data-v-3b9d91bc="" href="javascript:;" id="historyBack3">返回</a>
+                </p>
+                <ul data-v-c402b53e="" data-v-3b9d91bc="" class="table-list">
+                    <!---->
+                    <!---->
+                    <!---->
+                    <li data-v-c402b53e="" data-v-3b9d91bc="" class="qc-16">
+                        <ul data-v-c402b53e="" data-v-3b9d91bc="" slot="recodeNumber" class="lh_num_record">
+                            开奖结果：
+
+                            @foreach (string s in lr.ShowOpenNumInfo.Split(','))
+                            {
+                                string[] arr = s.Split('-');
+                                
+                                <li data-v-c402b53e="" data-v-3b9d91bc="" class="item lh_item">
+                                    <span data-v-c402b53e="" data-v-3b9d91bc="" class="numberlhc number-@arr[2]">@arr[0]</span>
+                                </li>
+                            }
+
+
+                            @foreach (string s in lr.ShowShengXiao.Split(' '))
+                            {
+                                <li data-v-c402b53e="" data-v-3b9d91bc="" class="item lh_item">
+                                    <span data-v-c402b53e="" data-v-3b9d91bc="" class="numberlhc">@s</span>
+                                </li>
+                            }
+
+
+
+                        </ul>
+                        <div data-v-c187c242="" data-v-c402b53e="" class="table-wrap table-w" data-v-3b9d91bc="">
+                            <table data-v-c187c242="" class="table">
+                                <tr data-v-c187c242="">
+                                    <th data-v-c187c242="">订单号</th>
+                                    <th data-v-c187c242="">时间</th>
+                                    <th data-v-c187c242="">期号</th>
+                                    <th data-v-c187c242="">类型</th>
+                                    <th data-v-c187c242="">赔率</th>
+                                    <th data-v-c187c242="">投注金额</th>
+                                    <th data-v-c187c242="">退水</th>
+                                    <th data-v-c187c242="">输赢</th>
+                                </tr>
+
+
+                                @foreach (BettingRecord r in ViewBag.list)
+                                {
+                                    var betMoney = r.BetCount * r.UnitMoney;
+                                    
+                                    <tr data-v-c187c242="">
+                                        <td data-v-c187c242="">@r.Id</td>
+                                        <td data-v-c187c242="">@r.ShowTime</td>
+                                        <td data-v-c187c242="">@r.Issue</td>
+                                        <td data-v-c187c242="">
+                                            <span data-v-c402b53e="" data-v-c187c242="">@r.PlayName</span> <span data-v-c402b53e="" data-v-c187c242="" class="blue">@r.BetNum</span>
+                                        </td>
+                                        <td data-v-c187c242="">
+                                            <span data-v-c402b53e="" data-v-c187c242="">@r.Peilv</span>
+                                        </td>
+                                        <td data-v-c187c242="">@betMoney</td>
+                                        <td data-v-c187c242="">@r.TuiShui</td>
+                                        <td data-v-c187c242="">
+
+                                            @if (r.ShuYing > 0)
+                                            {
+                                                <span data-v-c402b53e="" data-v-c187c242="" style="color: red;">@r.ShuYing</span>
+                                            }
+                                            else
+                                            {
+                                                <span data-v-c402b53e="" data-v-c187c242="" style="color: green;">@r.ShuYing</span>
+                                            }
+
+                                        </td>
+                                    </tr>
+                                }
+
+
+
+
+
+                                <!---->
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

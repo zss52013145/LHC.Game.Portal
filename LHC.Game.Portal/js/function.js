@@ -20,7 +20,12 @@ var thisYearSX = '虎';
 var money = 0;
 
 
-var weijiemingxi1 = '';
+var weijiemingxi1 = '';          //未结明细 第一层缓存
+
+var history1 = '';
+var history2 = '';
+var history3 = '';
+var history4 = '';
 
 $(function () {
 
@@ -101,9 +106,19 @@ $(function () {
 
     BindsettlementDetailCLick();                //今日结算详情
 
+    BindlookHistoryCLick();             //历史报表  查看
+
+    BindhistoryBackCLick();             //历史报表  返回1
+
+    BindgoHistory3CLick();             //历史报表-3  查看-2
+
+    BindgoHistory4CLick();              //历史报表-4  查看-2
+
     //setInterval('LoadLastBet();', 3000);
 
 });
+
+
 
 
 function Init() {
@@ -185,6 +200,76 @@ function Init() {
 }
 
 
+
+
+
+function BindgoHistory4CLick() {
+    $('#goHistory4').live('click', function () {
+
+
+        var cid = $(this).attr('cid');
+        var issue = $(this).html();
+
+        $.post('/record/Histrory4', { issue: issue, lType: cid }, function (data) {
+
+            history3 = $('#messageBox').html();
+            $('#messageBox').html(data).show();
+        })
+    })
+}
+
+
+function BindgoHistory3CLick() {
+    $('.goHistory3').live('click', function () {
+
+
+        var cid = $(this).attr('cid');
+        var date = $(this).attr('date');
+
+        $.post('/record/Histrory3', { date: date,lType:cid }, function (data) {
+
+            history2 = $('#messageBox').html();
+            $('#messageBox').html(data).show();
+        })
+    })
+}
+
+
+
+function BindhistoryBackCLick() {
+    $('#historyBack').live('click', function () {
+
+        $('#messageBox').html(history1);
+    })
+
+
+    $('#historyBack2').live('click', function () {
+
+        $('#messageBox').html(history2);
+    })
+
+    $('#historyBack3').live('click', function () {
+
+        $('#messageBox').html(history3);
+    })
+    
+    
+}
+
+
+function BindlookHistoryCLick() {
+    $('.lookHistory').live('click', function () {
+
+
+        var cid = $(this).attr('cid');
+
+        $.post('/record/Histrory2', { date:cid }, function (data) {
+
+            history1 = $('#messageBox').html();
+            $('#messageBox').html(data).show();
+        })
+    })
+}
 
 
 

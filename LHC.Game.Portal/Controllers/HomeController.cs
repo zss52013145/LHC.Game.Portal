@@ -27,7 +27,7 @@ namespace LHC.Game.Portal.Controllers
 
             string date = DateTime.Now.ToString("yyyy-MM-dd");
             string time1 = date + " 0:0:0";
-            string time2 = date + " 23:59:0";
+            string time2 = date + " 23:59:59";
 
             sql = "select sum( winMoney + tuishui -   betcount*unitmoney) from BettingRecord where WinState <> 1 and  SubTime > '" + time1 + "' and  SubTime <'" + time2 + "'";
 

@@ -1,0 +1,74 @@
+﻿<div data-v-3b9d91bc="" data-v-c402b53e="" class="dialog_wrap dialog" style="">
+    <div data-v-3b9d91bc="" class="dialog" style="min-height: 500px;" flag="true">
+        <div data-v-3b9d91bc="" class="t_b-c dialog_title" style="cursor: move;">
+            结算报表
+      <a data-v-3b9d91bc="" href="javascript:;" class="dialog_close"></a>
+        </div>
+        <div data-v-3b9d91bc="" class="dialog_content" style="min-height: 500px;">
+            <div data-v-c402b53e="" data-v-3b9d91bc="" class="date clearBoth">
+            </div>
+            <div data-v-c402b53e="" data-v-3b9d91bc="" class="wrap">
+                <p data-v-c402b53e="" data-v-3b9d91bc="" style="line-height: 40px; text-align: right;">
+                    <a data-v-c402b53e="" data-v-3b9d91bc="" href="javascript:;" id="historyBack">返回</a>
+                </p>
+                <ul data-v-c402b53e="" data-v-3b9d91bc="" class="table-list">
+                    <!---->
+                    <li data-v-c402b53e="" data-v-3b9d91bc="" class="qc-16">
+                        <div data-v-c187c242="" data-v-c402b53e="" class="table-wrap table-w" data-v-3b9d91bc="">
+                            <table data-v-c187c242="" class="table">
+                                <tr data-v-c187c242="">
+                                    <th data-v-c187c242="">彩票类型</th>
+                                    <th data-v-c187c242="">注数</th>
+                                    <th data-v-c187c242="">下注金额</th>
+                                    <th data-v-c187c242="">退水</th>
+                                    <th data-v-c187c242="">输赢</th>
+                                </tr>
+                                <tr data-v-c187c242="">
+                                    <td data-v-c187c242="">
+                                        <a data-v-c402b53e="" data-v-c187c242="" href="javascript:;" class="goHistory3" date="@ViewBag.date" cid="1">香港六合彩</a>
+                                    </td>
+                                    <td data-v-c187c242="">@ViewBag.count</td>
+                                    <td data-v-c187c242="">@ViewBag.betMoney</td>
+                                    <td data-v-c187c242="">@ViewBag.TuiShui</td>
+                                    <td data-v-c187c242="">
+
+                                        @if (ViewBag.SY > 0)
+                                        {
+                                            <span data-v-c402b53e="" data-v-c187c242="" style="color:red;">@ViewBag.SY</span>
+                                        }
+                                        else
+                                        {
+                                            <span data-v-c402b53e="" data-v-c187c242="" style="color:green;">@ViewBag.SY</span>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr data-v-c187c242="">
+                                    <td data-v-c187c242="">
+                                        <a data-v-c402b53e="" data-v-c187c242="" href="javascript:;" class="goHistory3"  date="@ViewBag.date" cid="3">澳门六合彩</a>
+                                    </td>
+                                    <td data-v-c187c242="">@ViewBag.count2</td>
+                                    <td data-v-c187c242="">@ViewBag.betMoney2</td>
+                                    <td data-v-c187c242="">@ViewBag.TuiShui2</td>
+                                    <td data-v-c187c242="">
+
+                                        @if (ViewBag.SY2 > 0)
+                                        {
+                                            <span data-v-c402b53e="" data-v-c187c242="" style="color:red;">@ViewBag.SY2</span>
+                                        }
+                                        else
+                                        {
+                                            <span data-v-c402b53e="" data-v-c187c242="" style="color:green;">@ViewBag.SY2</span>
+                                        }
+                                    </td>
+                                </tr>
+                                <!---->
+                            </table>
+                        </div>
+                    </li>
+                    <!---->
+                    <!---->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

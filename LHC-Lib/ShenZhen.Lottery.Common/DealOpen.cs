@@ -1276,7 +1276,9 @@ namespace ShenZhen.Lottery.Common
             if (tempMoney > 0 && user.Id > 0)
             {
                 decimal currentMoney = user.Money + tempMoney;
-                sql += Util.GetProfitLossSql(user.Id, 2, tempMoney, currentMoney);
+                string mark = "返奖[" + Util.GetlTypeName(lType) + "]第[" + br.Issue + "]期";
+
+                sql += Util5.GetProfitLossSql(user.Id, 2, tempMoney, currentMoney,mark);
             }
 
 
