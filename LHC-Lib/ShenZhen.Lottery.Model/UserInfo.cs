@@ -65,7 +65,7 @@ namespace ShenZhen.Lottery.Model
 
         public string PanKou { get; set; }
 
-        public  int CreditLine { get; set; }           //信用额度
+        public int CreditLine { get; set; }           //信用额度
 
 
         //扩展字段
@@ -95,12 +95,25 @@ namespace ShenZhen.Lottery.Model
         {
             get
             {
-                if (this.Type == 1)
+                if (this.Type == 2)
+                {
+                    return "股东";
+                }
+                else if (this.Type == 3)
+                {
+                    return "总代理";
+                }
+                else if (this.Type == 4)
                 {
                     return "代理";
                 }
+                else if (this.Type == 5)
+                {
+                    return "会员";
+                }
 
-                return "会员";
+
+                return "";
             }
         }
 
@@ -269,6 +282,7 @@ namespace ShenZhen.Lottery.Model
                 {
                     string sql = "select UserName from UserInfo where Id=" + this.PId;
                     object o = SqlHelper.ExecuteScalar(sql);
+
                     if (o != DBNull.Value && o != null)
                     {
                         return o.ToString();
@@ -278,6 +292,128 @@ namespace ShenZhen.Lottery.Model
                         return "";
                     }
                 }
+            }
+        }
+
+
+
+        //public int Type2Id
+        //{
+        //    get
+        //    {
+
+        //        string sql = "select * from UserInfo where Id = " + this.PId;
+        //        var pUser = Util.ReaderToModel<UserInfo>(sql);
+
+        //        while (pUser.PId != 0)
+        //        {
+        //            sql = "select * from UserInfo where Id = " + pUser.PId;
+        //            pUser = Util.ReaderToModel<UserInfo>(sql);
+        //        }
+
+        //        return pUser.Id;
+        //    }
+        //}
+
+        //public int Type3Id
+        //{
+        //    get
+        //    {
+
+        //        string sql = "select * from UserInfo where Id = " + this.PId;
+        //        var pUser = Util.ReaderToModel<UserInfo>(sql);
+
+        //        while (pUser.PId != 2)
+        //        {
+        //            sql = "select * from UserInfo where Id = " + pUser.PId;
+        //            pUser = Util.ReaderToModel<UserInfo>(sql);
+        //        }
+
+        //        return pUser.Id;
+        //    }
+        //}
+
+
+
+        //public int Type4Id
+        //{
+        //    get
+        //    {
+
+        //        string sql = "select * from UserInfo where Id = " + this.PId;
+        //        var pUser = Util.ReaderToModel<UserInfo>(sql);
+
+        //        while (pUser.PId != 3)
+        //        {
+        //            sql = "select * from UserInfo where Id = " + pUser.PId;
+        //            pUser = Util.ReaderToModel<UserInfo>(sql);
+        //        }
+
+        //        return pUser.Id;
+        //    }
+        //}
+
+
+
+        //会员类型
+        public string ShowUserType
+        {
+            get
+            {
+                if (this.PId != null && this.Type == 5)
+                {
+                    string sql = "select * from UserInfo where Id=" + this.PId;
+
+                    UserInfo pUser = Util.ReaderToModel<UserInfo>(sql);
+
+                    if (pUser.Type == 2)
+                    {
+                        return "直属股东";
+                    }
+                    else if (pUser.Type == 3)
+                    {
+                        return "直属总代理";
+                    }
+                    else if (pUser.Type == 4)
+                    {
+                        return "普通会员";
+                    }
+                }
+
+                return "";
+            }
+        }
+
+        //下级代理个数
+        public int NextProxyCount
+        {
+            get
+            {
+                if (this.Type == 3)
+                {
+                    string sql = "select count(1) from UserInfo where PId=" + Id + " and  Type = 4";
+
+                    return Util.GetCountByDataBase(sql);
+                }
+
+                return 0;
+            }
+        }
+
+
+        //下级会员个数
+        public int NextUserCount
+        {
+            get
+            {
+                if (this.Type == 3)
+                {
+                    string sql = "select count(1) from UserInfo where PId=" + Id + " and  Type = 5";
+
+                    return Util.GetCountByDataBase(sql);
+                }
+
+                return 0;
             }
         }
 
