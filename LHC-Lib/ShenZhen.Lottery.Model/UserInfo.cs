@@ -67,6 +67,8 @@ namespace ShenZhen.Lottery.Model
 
         public int CreditLine { get; set; }           //信用额度
 
+        public double TuiShuiRate { get; set; }           //退水比例
+
 
         //扩展字段
 
