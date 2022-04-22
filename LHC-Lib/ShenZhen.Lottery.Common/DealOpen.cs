@@ -336,9 +336,10 @@ namespace ShenZhen.Lottery.Common
                         string shengxiao = Util.GetShengxiaoByDigit(tema);
                         //if (betNum.Contains(shengxiao)) winCount++;
 
-                        if (betNum.Contains(shengxiao)) {
-                        
-                           //从剩下的号码中取出5个号码 组成一注
+                        if (betNum.Contains(shengxiao))
+                        {
+
+                            //从剩下的号码中取出5个号码 组成一注
 
                             int len = betNum.Split(',').Length - 1;
 
@@ -920,7 +921,7 @@ namespace ShenZhen.Lottery.Common
                     #endregion
 
                 }
-              
+
                 else if (playName == "五不中")
                 {
                     winCount = BuZhong(5, betArr, openNum);
@@ -1172,7 +1173,7 @@ namespace ShenZhen.Lottery.Common
 
                     winMoney = winCount1 * peilv1 * br.UnitMoney + winCount2 * peilv2 * br.UnitMoney;
 
-                    if (playName.Contains("肖连不中") || playName.Contains("尾连中") || playName == "三中二" )
+                    if (playName.Contains("肖连不中") || playName.Contains("尾连中") || playName == "三中二")
                     {
 
                         winMoney = winCount1 * peilv2 * br.UnitMoney + winCount2 * peilv1 * br.UnitMoney;
@@ -1215,35 +1216,167 @@ namespace ShenZhen.Lottery.Common
             //更新单子状态
             sql += "update BettingRecord set WinState = " + winState + ",WinCount = " + winCount + ",WinMoney = " + winMoney + " where Id = " + br.Id;
 
-            decimal tuishui = 0;
 
-            //特殊情况-六合彩特码B退水
-            if (playName == "特码B")
+            #region 各级退水处理
+
+            double tuishui = 0;
+
+            //string sql2 = "select * from TuiShuiInfo where UserId = 1 and ltype =" + lType + " and playname='" + br.PlayName + "'";
+
+            //TuiShuiInfo tsi = Util.ReaderToModel<TuiShuiInfo>(sql2);
+
+            //object obj = tsi.GetType().GetProperty(user.PanKou).GetValue(tsi, null);
+
+            tuishui = Common2.GetTuiShuiRate(br.UserId, br.lType, user.PanKou, br.PlayName) * (br.BetCount * br.UnitMoney) / 100;
+
+            double ts3 = 0;
+            double ts4 = 0;
+            double ts5 = user.TuiShuiRate;
+
+
+            double m2 = 0;              //股东退水
+            double m3 = 0;              //股东退水
+            double m4 = 0;              //股东退水
+            double m5 = 0;              //股东退水
+
+            UserInfo pUser = Util.GetEntityById<UserInfo>(user.PId);
+
+
+            #region 过程
+
+            //4级
+            if (pUser.Type == 4)                        //上级是代理
             {
-                //退水
-                string seaSql = "select Value from Setting where [Key] ='TuiShuiForLHC'";
-                decimal tuishuiRate = Convert.ToDecimal(SqlHelper.ExecuteScalar(seaSql));
+                ts4 = pUser.TuiShuiRate;        //代理
 
-                tuishui += (decimal)(br.BetCount * br.UnitMoney * tuishuiRate);
-                sql += "update BettingRecord set TuiShui = " + tuishui + " where Id = " + br.Id;
+                pUser = Util.GetEntityById<UserInfo>(pUser.PId);
 
-
-                //更新彩票余额
-                //Common.UpdateLotteryMoney(user, tuishui);
+                ts3 = pUser.TuiShuiRate;        //总代
 
 
-                if (Common.IsTryUser(user))
+                //1.2.3
+                if (ts3 != 100 && ts4 != 100 && ts5 != 100)
                 {
-                    user.Money += tuishui;
-                    Common.UpdateCacheUser(user);
+
+                    m2 = tuishui * ts3;
+                    m3 = tuishui * ts4;
+                    m4 = tuishui * ts5;
+                    m5 = tuishui * (1 - ts3 - ts4 - ts5);
+
                 }
                 else
                 {
-                    sql += "update UserInfo set Money+=" + tuishui + " where Id=" + user.Id;
+
+                    if (ts3 == 100)
+                    {
+                        m2 = tuishui;
+                    }
+                    else if (ts4 == 100)
+                    {
+
+                        m2 = tuishui * ts3;
+
+                        m3 = tuishui * (1 - ts3);
+                    }
+                    else if (ts5 == 100)
+                    {
+
+                        m2 = tuishui * ts3;
+                        m3 = tuishui * ts4;
+                        m4 = tuishui * (1 - ts3 - ts4);
+                    }
                 }
 
+            }
+            else if (pUser.Type == 3)                  //上级是总代
+            {
+
+                ts3 = pUser.TuiShuiRate;        //总代
+
+                if (ts3 != 100 && ts5 != 100)
+                {
+                    m2 = tuishui * ts3;
+                    m3 = tuishui * ts5;
+
+                    m5 = tuishui * (1 - ts3 - ts5);
+
+                }
+                else
+                {
+                    if (ts3 == 100)
+                    {
+                        m2 = tuishui;
+                    }
+                    else if (ts5 == 100)
+                    {
+                        m2 = tuishui * ts3;
+
+                        m3 = tuishui * (1 - ts3);
+                    }
+
+                }
 
             }
+            else if (pUser.Type == 2)       //上级是股东
+            {
+
+                if (ts5 == 0)
+                {
+                    m5 = tuishui;
+                }
+                else if (ts5 == 100)
+                {
+                    m2 = tuishui;
+                }
+                else
+                {
+                    m2 = tuishui * ts5;
+                    m5 = tuishui * (1 - ts5);
+                }
+
+            }
+
+
+
+
+
+            #endregion
+
+
+            sql += "update BettingRecord set TuiShui2 = " + m2 + ",TuiShui3 = " + m3 + ",TuiShui4 = " + m4 + ",TuiShui5 = " + m5 + " where Id = " + br.Id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ////退水
+            //string seaSql = "select Value from Setting where [Key] ='TuiShuiForLHC'";
+            //decimal tuishuiRate = Convert.ToDecimal(SqlHelper.ExecuteScalar(seaSql));
+
+            //tuishui += (decimal)(br.BetCount * br.UnitMoney * tuishuiRate);
+            //sql += "update BettingRecord set TuiShui = " + tuishui + " where Id = " + br.Id;
+
+
+            //sql += "update UserInfo set Money+=" + tuishui + " where Id=" + user.Id;
+
+
+
+
+
+
+            #endregion
+
+
+
 
 
             //特殊情况-打和
@@ -1252,33 +1385,23 @@ namespace ShenZhen.Lottery.Common
                 //退还本金
                 decimal betMoney = (decimal)(br.BetCount * br.UnitMoney);
 
-                tuishui += betMoney;
+                //tuishui += betMoney;
 
-                //更新彩票余额
-                //Common.UpdateLotteryMoney(user, betMoney);
+                sql += "update UserInfo set Money+=" + betMoney + " where Id=" + user.Id;
 
-                if (Common.IsTryUser(user))
-                {
-                    user.Money += betMoney;
-                    Common.UpdateCacheUser(user);
-                }
-                else
-                {
-                    sql += "update UserInfo set Money+=" + betMoney + " where Id=" + user.Id;
-                }
 
-                sql += "update BettingRecord set TuiShui=" + betMoney + " where Id = " + br.Id;
+                //sql += "update BettingRecord set TuiShui=" + betMoney + " where Id = " + br.Id;
 
             }
 
-            decimal tempMoney = winMoney + tuishui;
+            decimal tempMoney = winMoney + (decimal)m5;
 
             if (tempMoney > 0 && user.Id > 0)
             {
                 decimal currentMoney = user.Money + tempMoney;
                 string mark = "返奖[" + Util.GetlTypeName(lType) + "]第[" + br.Issue + "]期";
 
-                sql += Util5.GetProfitLossSql(user.Id, 2, tempMoney, currentMoney,mark);
+                sql += Util5.GetProfitLossSql(user.Id, 2, tempMoney, currentMoney, mark);
             }
 
 

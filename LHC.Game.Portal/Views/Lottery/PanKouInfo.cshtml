@@ -28,19 +28,21 @@
                     </tr>
 
 
-                    @foreach (PlayInfo p in ViewBag.data)
+                    @foreach (TuiShuiInfo p in ViewBag.data)
                     {
+                        Type t = p.GetType();//获得该类的Type
+                        
                         <tr data-v-c187c242="">
                             <td data-v-c187c242="">@p.ShowlTypeName</td>
                             <td data-v-c187c242="">@p.PlayName</td>
-                            <td data-v-c187c242="">@p.MaxForOne</td>
-                            <td data-v-c187c242="">@p.MaxForAll</td>
-                            <td data-v-c187c242="">@p.TuiShui</td>
+                            <td data-v-c187c242="">@p.Max1</td>
+                            <td data-v-c187c242="">@p.Max2</td>
+                            <td data-v-c187c242="">@t.GetProperty(user.PanKou).GetValue(p, null)</td>
                         </tr>
                     }
 
-                    
-                    
+
+
                     <!---->
                 </table>
             </div>

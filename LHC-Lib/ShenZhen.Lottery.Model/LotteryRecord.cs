@@ -170,6 +170,12 @@ namespace ShenZhen.Lottery.Model
         }
 
 
+        public string ShowTime2
+        {
+            get { return this.SubTime.ToString("MM-dd HH:mm:ss"); }
+        }
+
+
         //开奖下面一排的信息
         public string ShowShengXiao
         {

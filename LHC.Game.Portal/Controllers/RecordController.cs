@@ -38,9 +38,9 @@ namespace LHC.Game.Portal.Controllers
 
             List<BettingRecord> list = Util.ReaderToList<BettingRecord>(sql);
 
-            ViewBag.tuishui = list.Sum(p => p.TuiShui);
+            ViewBag.tuishui = list.Sum(p => p.TuiShui5);
 
-            ViewBag.sy = list.Sum(p => p.TuiShui + p.WinMoney - p.BetCount * p.UnitMoney);
+            ViewBag.sy = list.Sum(p => p.TuiShui5 + p.WinMoney - p.BetCount * p.UnitMoney);
 
             ViewBag.count = list.Count;
 
@@ -145,9 +145,9 @@ namespace LHC.Game.Portal.Controllers
                 list = Util.ReaderToList<BettingRecord>(sql);
 
                 dr.BetMoney = list.Sum(p => p.BetCount * p.UnitMoney);
-                dr.TuiShui = list.Sum(p => p.TuiShui);
+                dr.TuiShui = list.Sum(p => p.TuiShui5);
                 dr.BetCount = list.Count;
-                dr.SY = list.Sum(p => p.WinMoney + p.TuiShui - p.BetCount * p.UnitMoney);
+                dr.SY = list.Sum(p => p.WinMoney + p.TuiShui5 - p.BetCount * p.UnitMoney);
 
                 reportList3.Add(dr);
 
@@ -187,9 +187,9 @@ namespace LHC.Game.Portal.Controllers
                 list = Util.ReaderToList<BettingRecord>(sql);
 
                 dr.BetMoney = list.Sum(p => p.BetCount * p.UnitMoney);
-                dr.TuiShui = list.Sum(p => p.TuiShui);
+                dr.TuiShui = list.Sum(p => p.TuiShui5);
                 dr.BetCount = list.Count;
-                dr.SY = list.Sum(p => p.WinMoney + p.TuiShui - p.BetCount * p.UnitMoney);
+                dr.SY = list.Sum(p => p.WinMoney + p.TuiShui5 - p.BetCount * p.UnitMoney);
 
                 reportList.Add(dr);
 
@@ -235,8 +235,8 @@ namespace LHC.Game.Portal.Controllers
 
             ViewBag.count = list.Count;
             ViewBag.betMoney = list.Sum(p => p.BetCount * p.UnitMoney);
-            ViewBag.TuiShui = list.Sum(p => p.TuiShui);
-            ViewBag.SY = list.Sum(p => p.WinMoney + p.TuiShui - p.BetCount * p.UnitMoney);
+            ViewBag.TuiShui = list.Sum(p => p.TuiShui5);
+            ViewBag.SY = list.Sum(p => p.WinMoney + p.TuiShui5 - p.BetCount * p.UnitMoney);
 
 
             //---------------------------
@@ -247,8 +247,8 @@ namespace LHC.Game.Portal.Controllers
 
             ViewBag.count2 = list.Count;
             ViewBag.betMoney2 = list.Sum(p => p.BetCount * p.UnitMoney);
-            ViewBag.TuiShui2 = list.Sum(p => p.TuiShui);
-            ViewBag.SY2 = list.Sum(p => p.WinMoney + p.TuiShui - p.BetCount * p.UnitMoney);
+            ViewBag.TuiShui2 = list.Sum(p => p.TuiShui5);
+            ViewBag.SY2 = list.Sum(p => p.WinMoney + p.TuiShui5 - p.BetCount * p.UnitMoney);
 
 
             return View();
@@ -285,8 +285,8 @@ namespace LHC.Game.Portal.Controllers
 
             ViewBag.count = list.Count;
             ViewBag.betMoney = list.Sum(p => p.BetCount * p.UnitMoney);
-            ViewBag.TuiShui = list.Sum(p => p.TuiShui);
-            ViewBag.SY = list.Sum(p => p.WinMoney + p.TuiShui - p.BetCount * p.UnitMoney);
+            ViewBag.TuiShui = list.Sum(p => p.TuiShui5);
+            ViewBag.SY = list.Sum(p => p.WinMoney + p.TuiShui5 - p.BetCount * p.UnitMoney);
 
             ViewBag.lTypeName = Util.GetlTypeName(lType);
 

@@ -58,13 +58,14 @@
     <Compile Include="Dzd.cs" />
     <Compile Include="FanShui.cs" />
     <Compile Include="FriendLink.cs" />
+    <Compile Include="LoginLog.cs" />
     <Compile Include="LotteryRecord.cs" />
     <Compile Include="LotteryType.cs" />
     <Compile Include="OpenFail.cs" />
     <Compile Include="OpRecord.cs" />
     <Compile Include="Partial.cs" />
-    <Compile Include="PlayInfo2.cs" />
-    <Compile Include="PlayInfo.cs" />
+    <Compile Include="PeiLvInfo.cs" />
+    <Compile Include="TuiShuiInfo.cs" />
     <Compile Include="PlaySamllType.cs" />
     <Compile Include="PossibleWin.cs" />
     <Compile Include="ProfitLoss.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Notice.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="RemindRecord.cs" />
+    <Compile Include="ChangeRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShenZhen.Lottery.Public\ShenZhen.Lottery.Public.csproj">

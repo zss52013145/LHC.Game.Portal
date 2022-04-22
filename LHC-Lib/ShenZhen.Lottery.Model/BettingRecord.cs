@@ -27,12 +27,18 @@ namespace ShenZhen.Lottery.Model
         public int UnitMoney { get; set; }
         public int WinCount { get; set; }
         public decimal WinMoney { get; set; }
-        public decimal TuiShui { get; set; }  //退水
         public int WinState { get; set; }
         public int Type { get; set; }
         public string NewOrderId { get; set; }
         public System.DateTime SubTime { get; set; }
         public decimal BetYE { get; set; }
+
+
+        public decimal TuiShui2 { get; set; }  //退水
+        public decimal TuiShui3 { get; set; }  //退水
+        public decimal TuiShui4 { get; set; }  //退水
+        public decimal TuiShui5 { get; set; }  //退水
+
 
         public decimal SY { get; set; }
 
@@ -52,6 +58,259 @@ namespace ShenZhen.Lottery.Model
 
 
         //扩展字段
+
+        //获取股东退水比例【顶层】
+        public static double GetTuiShuiRate(int userId, int lType, string pankou, string playName)
+        {
+
+            string sql2 = "select * from TuiShuiInfo where UserId = 1 and ltype =" + lType + " and playname='" + playName + "'";
+
+            TuiShuiInfo tsi = Util.ReaderToModel<TuiShuiInfo>(sql2);
+
+            object obj = tsi.GetType().GetProperty(pankou).GetValue(tsi, null);
+
+            return Convert.ToDouble(obj);
+
+        }
+
+
+        public string ShowTuiShui
+        {
+
+            get
+            {
+
+
+                string result = "";
+
+
+
+
+                UserInfo user = Util.GetEntityById<UserInfo>(UserId);
+
+                double tuishui = GetTuiShuiRate(UserId, lType, user.PanKou, PlayName);
+
+
+
+
+
+                double ts3 = 0;
+                double ts4 = 0;
+                double ts5 = user.TuiShuiRate;
+
+
+                double m2 = 0;              //股东退水
+                double m3 = 0;              //股东退水
+                double m4 = 0;              //股东退水
+                double m5 = 0;              //股东退水
+
+
+                UserInfo pUser = Util.GetEntityById<UserInfo>(user.PId);
+
+                #region 过程
+
+                //4级
+                if (pUser.Type == 4)                        //上级是代理
+                {
+                    ts4 = pUser.TuiShuiRate;        //代理
+
+                    pUser = Util.GetEntityById<UserInfo>(pUser.PId);
+
+                    ts3 = pUser.TuiShuiRate;        //总代
+
+
+
+                    if (ts3 != 100 && ts4 != 100 && ts5 != 100)
+                    {
+                        //没有不退
+                        m2 = tuishui;
+                        m3 = tuishui - ts3;
+                        m4 = tuishui - ts3 - ts4;
+                        m5 = tuishui - ts3 - ts4 - ts5;
+
+                    }
+                    else
+                    {
+
+                        if (ts3 == 100)
+                        {
+                            m2 = tuishui;
+                        }
+                        else if (ts4 == 100)
+                        {
+
+                            m2 = tuishui;
+                            m3 = tuishui - ts3;
+                        }
+                        else if (ts5 == 100)
+                        {
+
+                            m2 = tuishui;
+                            m3 = tuishui - ts3;
+                            m4 = tuishui - ts3 - ts4;
+                        }
+                    }
+
+                }
+                else if (pUser.Type == 3)                  //上级是总代
+                {
+
+                    ts3 = pUser.TuiShuiRate;        //总代
+
+                    if (ts3 != 100 && ts5 != 100)
+                    {
+                        m2 = tuishui;
+                        m3 = tuishui - ts3;
+                        m5 = tuishui - ts3 - ts5;
+
+                    }
+                    else
+                    {
+                        if (ts3 == 100)
+                        {
+                            m2 = tuishui;
+                        }
+                        else if (ts5 == 100)
+                        {
+                            m2 = tuishui;
+                            m3 = tuishui - ts3;
+                        }
+
+                    }
+
+                }
+                else if (pUser.Type == 2)       //上级是股东
+                {
+
+                    if (ts5 == 0)  //全退
+                    {
+
+                        m2 = tuishui;
+                        m3 = tuishui;
+                        m4 = tuishui;
+                        m5 = tuishui;
+                    }
+                    else if (ts5 == 100)   //全扣
+                    {
+                        m2 = tuishui;
+                    }
+                    else
+                    {
+                        m2 = tuishui;
+                        m3 = tuishui;
+                        m4 = tuishui;
+                        m5 = tuishui - ts5;
+                    }
+
+                }
+
+
+
+
+
+                #endregion
+
+
+                result += m2 + "|" + m3 + "|" + m4 + "|" + m5;
+
+
+                return result;
+
+
+                //string sql = "select * from TuiShuiInfo where UserId =   " + UserId + " and ltype =" + lType + " and playname='" + PlayName + "'";
+
+                //TuiShuiInfo t = Util.ReaderToModel<TuiShuiInfo>(sql);
+
+                //UserInfo user = Util.GetEntityById<UserInfo>(UserId);
+
+                //Type type = t.GetType();
+
+                //object obj = type.GetProperty(user.PanKou).GetValue(t, null);   //会员的退水
+                //object obj2 = null;
+
+                //UserInfo pUser = Util.GetEntityById<UserInfo>(user.PId);
+
+
+                //if (pUser.Type == 2)
+                //{
+
+                //    sql = "select * from TuiShuiInfo where UserId = 1 and ltype =" + lType + " and playname='" + PlayName + "'";
+
+                //    t = Util.ReaderToModel<TuiShuiInfo>(sql);
+
+                //    obj2 = t.GetType().GetProperty(user.PanKou).GetValue(t, null);
+
+
+                //    if (user.TuiShuiRate == 0)
+                //    {
+                //        //全退
+                //        result = obj + "|" + obj + "|" + obj + "|" + obj;
+                //    }
+                //    else if (user.TuiShuiRate == 100)
+                //    {
+                //        //t.GetType().GetProperty(user.PanKou).GetValue(t, null);
+
+                //        //不退
+                //        result = 0 + "|" + 0 + "|" + 0 + "|" + obj2;
+                //    }
+                //    else
+                //    {
+                //        //不退
+                //        result = obj + "|" + obj2 + "|" + obj2 + "|" + obj2;
+                //    }
+
+                //}
+                //else if (pUser.Type == 3)
+                //{
+
+                //    sql = "select * from TuiShuiInfo where UserId = 1 and ltype =" + lType + " and playname='" + PlayName + "'";
+
+                //    t = Util.ReaderToModel<TuiShuiInfo>(sql);
+
+                //    obj2 = t.GetType().GetProperty(user.PanKou).GetValue(t, null);
+
+
+                //    if (user.TuiShuiRate == 0)
+                //    {
+                //        //全退
+                //        result = obj + "|" + obj + "|" + obj + "|" + obj;
+                //    }
+                //    else if (user.TuiShuiRate == 100)
+                //    {
+                //        //t.GetType().GetProperty(user.PanKou).GetValue(t, null);
+
+                //        //不退
+                //        result = 0 + "|" + 0 + "|" + 0 + "|" + obj2;
+                //    }
+                //    else
+                //    {
+                //        //不退
+                //        result = obj + "|" + obj2 + "|" + obj2 + "|" + obj2;
+                //    }
+
+                //}
+
+                ////上级
+
+                ////总代
+
+                ////股东
+
+
+
+                //return r + "";
+            }
+        }
+
+
+
+
+
+
+
+
+
+
         public string ShowPeilv
         {
 
@@ -141,7 +400,7 @@ namespace ShenZhen.Lottery.Model
 
         public string ShowTime2
         {
-            get { return this.SubTime.ToString("yy-MM-dd HH:mm:ss"); }
+            get { return this.SubTime.ToString("MM-dd HH:mm:ss"); }
         }
 
         public string ShowTime3
@@ -186,7 +445,7 @@ namespace ShenZhen.Lottery.Model
 
                 if (this.WinState > 2)
                 {
-                    result = this.WinMoney + this.TuiShui - (this.BetCount * this.UnitMoney);
+                    result = this.WinMoney + this.TuiShui5 - (this.BetCount * this.UnitMoney);
                     //result = this.SY;
                 }
 
@@ -204,7 +463,7 @@ namespace ShenZhen.Lottery.Model
 
                 if (this.WinState > 2)
                 {
-                    result = this.WinMoney + this.TuiShui - (this.BetCount * this.UnitMoney);
+                    result = this.WinMoney + this.TuiShui5 - (this.BetCount * this.UnitMoney);
                     //result = this.SY;
                 }
 
@@ -234,7 +493,7 @@ namespace ShenZhen.Lottery.Model
             {
                 if (this.WinState > 2)
                 {
-                    return this.WinMoney + this.TuiShui - (this.BetCount * this.UnitMoney);
+                    return this.WinMoney + this.TuiShui5 - (this.BetCount * this.UnitMoney);
                 }
 
                 return 0;
@@ -319,26 +578,26 @@ namespace ShenZhen.Lottery.Model
             {
                 if (WinState == 1)
                 {
-                    return "未开奖";
+                    return "未结算";
                 }
-                else if (WinState == 2)
-                {
-                    return "已撤单";
-                }
-                else if (WinState == 3)
-                {
-                    return "已中奖";
-                }
-                else if (WinState == 4)
-                {
-                    return "未中奖";
-                }
-                else if (WinState == 5)
-                {
-                    return "和";
-                }
+                //else if (WinState == 2)
+                //{
+                //    return "已撤单";
+                //}
+                //else if (WinState == 3)
+                //{
+                //    return "已中奖";
+                //}
+                //else if (WinState == 4)
+                //{
+                //    return "未中奖";
+                //}
+                //else if (WinState == 5)
+                //{
+                //    return "和";
+                //}
 
-                return "";
+                return "已结算";
             }
         }
     }

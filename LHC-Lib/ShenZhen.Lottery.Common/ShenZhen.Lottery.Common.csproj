@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Common2.cs" />
     <Compile Include="DealOpen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DealOpen2.cs" />

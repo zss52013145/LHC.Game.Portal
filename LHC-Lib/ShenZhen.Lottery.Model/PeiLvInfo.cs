@@ -6,21 +6,23 @@ using System.Threading.Tasks;
 
 namespace ShenZhen.Lottery.Model
 {
-
     /// <summary>
-    /// 盘口信息
+    /// 赔率信息
     /// </summary>
-    public class PlayInfo
+    public class PeiLvInfo
     {
 
         public int Id { get; set; }
         public int lType { get; set; }
         public string PanKou { get; set; }
 
-        public string PlayName { get; set; }
-        public int MaxForOne { get; set; }
-        public int MaxForAll { get; set; }
-        public decimal TuiShui { get; set; }
+        public string PlayBigType { get; set; }
+
+        public string PlaySmallType { get; set; }
+
+        public string PlaySmallType2 { get; set; }
+      
+        public string PeiLv { get; set; }
 
 
         //---------------------

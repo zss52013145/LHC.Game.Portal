@@ -17,6 +17,28 @@ namespace LHC.Game.Portal.Controllers
     {
 
 
+        public ActionResult GetPeilv(int lType, string bigType, string smallType)
+        {
+            if (smallType.Contains("正") && smallType.Contains("特") && smallType.Length == 3)
+            {
+                smallType = "数字";
+            }
+
+
+            string sql = "select peilv from  PeiLvInfo where  ltype=" + lType + " and playbigtype=@bigType and  playsmalltype = @smallType and pankou='" + LoginUser.PanKou + "'";
+
+            SqlParameter[] pms =
+            {
+                new SqlParameter("@bigType",bigType),
+                new SqlParameter("@smallType",smallType),
+            };
+
+            object o = SqlHelper.ExecuteScalar(sql, pms);
+
+            return Content(o.ToString());
+
+        }
+
         /// <summary>
         /// 赔率数据
         /// </summary>
@@ -24,7 +46,7 @@ namespace LHC.Game.Portal.Controllers
         /// <returns></returns>
         public ActionResult PeilvData(int lType, string playBigType)
         {
-            string sql = "select  *  from  PlayInfo2 where lType = " + lType + " and PanKou=@PanKou and playBigType=@playBigType";
+            string sql = "select  *  from  PeiLvInfo where lType = " + lType + " and PanKou=@PanKou and playBigType=@playBigType";
 
             SqlParameter[] pms =
             {
@@ -32,7 +54,7 @@ namespace LHC.Game.Portal.Controllers
                 new SqlParameter("@playBigType",playBigType),
             };
 
-            List<PlayInfo2> list = Util.ReaderToList<PlayInfo2>(sql, pms);
+            List<PeiLvInfo> list = Util.ReaderToList<PeiLvInfo>(sql, pms);
 
             return Json(new { data = list }, JsonRequestBehavior.AllowGet);
         }
@@ -131,35 +153,15 @@ namespace LHC.Game.Portal.Controllers
         /// <returns></returns>
         public ActionResult PanKouInfo()
         {
-            string sql = "select * from PlayInfo  where  PanKou = '" + LoginUser.PanKou + "'";
+            string sql = "select * from TuiShuiInfo  where UserId = " + LoginUser.Id;
 
-            ViewBag.data = Util.ReaderToList<PlayInfo>(sql);
+            ViewBag.data = Util.ReaderToList<TuiShuiInfo>(sql);
 
             return View();
         }
 
 
-        public ActionResult GetPeilv(int lType, string bigType, string smallType)
-        {
-            if (smallType.Contains("正") && smallType.Contains("特") && smallType.Length == 3)
-            {
-                smallType = "数字";
-            }
-
-
-            string sql = "select peilv from  playinfo2 where  ltype=" + lType + " and playbigtype=@bigType and  playsmalltype = @smallType and pankou='" + LoginUser.PanKou + "'";
-
-            SqlParameter[] pms =
-            {
-                new SqlParameter("@bigType",bigType),
-                new SqlParameter("@smallType",smallType),
-            };
-
-            object o = SqlHelper.ExecuteScalar(sql, pms);
-
-            return Content(o.ToString());
-
-        }
+        
 
 
         /// <summary>

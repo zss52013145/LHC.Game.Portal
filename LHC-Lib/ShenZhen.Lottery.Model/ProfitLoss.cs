@@ -21,6 +21,9 @@ namespace ShenZhen.Lottery.Model
         public string Mark { get; set; }            //备注
 
 
+        public string Operator { get; set; }            //操作者
+
+
         //扩展
         public string UserName { get; set; }
         public string RealName { get; set; }
