@@ -32,9 +32,11 @@ $(function () {
     lType = $('#lType').val();  //赋初始值
 
 
-    //alert(lType);
+
 
     setInterval('StartOrEnd()', 5000);          //控制封盘或者开盘 显示赔率
+
+    setInterval('LoadLotteryMoney()', 2000);    //加载金额
 
 
     BindBigitleClick();             //大玩法
@@ -119,6 +121,12 @@ $(function () {
 });
 
 
+function LoadLotteryMoney() {
+
+    $.get('/Lottery/GetMoney', function (data) {
+        $('#keyongMoney').html(data);
+    })
+}
 
 
 function Init() {
@@ -132,7 +140,9 @@ function Init() {
 
     //$('.lh_subtitle_container').eq(0).find('.lh_subtitle:eq(0)').click();
 
-    $('#tab li:eq(0)').click();
+
+    //$('#tab li:eq(0)').click();
+
 
     //开奖数据
     $.post('/lottery/OpenData', { lType: lType }, function (data) {
@@ -193,9 +203,21 @@ function Init() {
             $('#openTime').html('<span data-v-eb4ccf6e="" class="tx"><i id="second2">' + parseInt(arr3[2]) + '</i>秒</span><span data-v-eb4ccf6e="" class="tx"><i id="minute2">' + parseInt(arr3[1]) + '</i>分:</span><span data-v-eb4ccf6e="" class="tx"><i id="hour2">' + parseInt(arr3[0]) + '</i>时:</span><span data-v-eb4ccf6e="" class="tx" style="color: black;">&nbsp;距开奖:</span>');
 
         }
+        else {
+
+            $('.c_time').eq(1).hide();
+            $('.c_time').eq(0).show();
+        }
+
+
+
+        $('#tab li:eq(0)').click();
 
     })
 
+
+
+    //$('#tab li:eq(0)').click();
 
 }
 
@@ -226,7 +248,7 @@ function BindgoHistory3CLick() {
         var cid = $(this).attr('cid');
         var date = $(this).attr('date');
 
-        $.post('/record/Histrory3', { date: date,lType:cid }, function (data) {
+        $.post('/record/Histrory3', { date: date, lType: cid }, function (data) {
 
             history2 = $('#messageBox').html();
             $('#messageBox').html(data).show();
@@ -252,8 +274,8 @@ function BindhistoryBackCLick() {
 
         $('#messageBox').html(history3);
     })
-    
-    
+
+
 }
 
 
@@ -263,7 +285,7 @@ function BindlookHistoryCLick() {
 
         var cid = $(this).attr('cid');
 
-        $.post('/record/Histrory2', { date:cid }, function (data) {
+        $.post('/record/Histrory2', { date: cid }, function (data) {
 
             history1 = $('#messageBox').html();
             $('#messageBox').html(data).show();
@@ -443,6 +465,8 @@ function BindconfirmBetClick() {
                 $('#money').val('');
                 $('.g_s-item input').val('').removeClass('active');
                 $('#confirmOrderDialog,#confirmOrderDialog2').hide();
+
+                betCount = 1;
 
 
                 ShowTanMin('恭喜您，下注成功！');
@@ -1070,19 +1094,64 @@ function BindbetClick() {
         }
         else {
 
-            //收集投注信息
-            $('input:visible').filter('.active').each(function () {
 
-                if (bigPlayName == '特肖首尾' || bigPlayName == '一肖尾数' || bigPlayName == '半波') {
-                    betContent += $(this).parents('.g_s-item').find('div:eq(0)').find('span').html() + '-';
-                    betContent += $(this).parents('.g_s-item').find('div:eq(2)').html() + '-' + money + '|';
-                }
-                else {
-                    betContent += $(this).parents('.g_s-item').find('div:eq(0)').find('span').html() + '-';
-                    betContent += $(this).parents('.g_s-item').find('div:eq(1)').html() + '-' + money + '|';
+
+            if (bigPlayName == '特肖首尾') {
+
+
+               
+
+                //1.判断有无特肖
+
+                var size = $('.g_s-item input:visible:lt(12)').filter('.active').size();
+
+                if (size > 0) {
+
+                    $('.g_s-item input:visible:lt(12)').filter('.active').each(function () {
+
+                        betContent += $(this).parents('.g_s-item').find('div:eq(0)').find('span').html() + '-';
+                        betContent += $(this).parents('.g_s-item').find('div:eq(2)').html() + '-' + money + '|';
+                    })
+
+                   
                 }
 
-            })
+                //2.判断有无特尾
+                size = $('.g_s-item input:visible:gt(11)').filter('.active').size();
+
+                if (size > 0) {
+
+                    $('.g_s-item input:visible:gt(11)').filter('.active').each(function () {
+
+                        betContent += $(this).parents('.g_s-item').find('div:eq(0)').find('span').html() + '-';
+                        betContent += $(this).parents('.g_s-item').find('div:eq(1)').html() + '-' + money + '|';
+                    })
+
+                }
+
+            }
+            else {
+
+                //收集投注信息
+
+                $('input:visible').filter('.active').each(function () {
+
+
+                    if (bigPlayName == '一肖尾数' || bigPlayName == '半波') {
+
+                        betContent += $(this).parents('.g_s-item').find('div:eq(0)').find('span').html() + '-';
+                        betContent += $(this).parents('.g_s-item').find('div:eq(2)').html() + '-' + money + '|';
+                    }
+                    else {
+                        betContent += $(this).parents('.g_s-item').find('div:eq(0)').find('span').html() + '-';
+                        betContent += $(this).parents('.g_s-item').find('div:eq(1)').html() + '-' + money + '|';
+                    }
+
+                })
+
+            }
+
+
 
 
             betContent = trimEnd(betContent);
@@ -1116,7 +1185,16 @@ function HandOrderDetail(betContent, money) {
     for (var i = 0; i < arr.length; i++) {
         var arr2 = arr[i].split('-');
 
-        $('#orderDetail').append('<tr data-v-c187c242=""><td data-v-c187c242=""><span data-v-a475f800="" data-v-c187c242="">' + smallPlayName + ' ' + arr2[0] + '</span></td><td data-v-c187c242="">' + arr2[1] + '</td><td data-v-c187c242="">' + arr2[2] + '</td><td data-v-c187c242=""><input data-v-a475f800="" data-v-c187c242="" type="checkbox" checked="checked" value="2550"></td></tr>');
+        //特殊情况  一肖首尾-特尾
+        if (contains(arr2[0], '尾') && smallPlayName == '特肖') {
+
+            $('#orderDetail').append('<tr data-v-c187c242=""><td data-v-c187c242=""><span data-v-a475f800="" data-v-c187c242="">特尾 ' + arr2[0] + '</span></td><td data-v-c187c242="">' + arr2[1] + '</td><td data-v-c187c242="">' + arr2[2] + '</td><td data-v-c187c242=""><input data-v-a475f800="" data-v-c187c242="" type="checkbox" checked="checked" value="2550"></td></tr>');
+        }
+        else {
+
+            $('#orderDetail').append('<tr data-v-c187c242=""><td data-v-c187c242=""><span data-v-a475f800="" data-v-c187c242="">' + smallPlayName + ' ' + arr2[0] + '</span></td><td data-v-c187c242="">' + arr2[1] + '</td><td data-v-c187c242="">' + arr2[2] + '</td><td data-v-c187c242=""><input data-v-a475f800="" data-v-c187c242="" type="checkbox" checked="checked" value="2550"></td></tr>');
+        }
+
     }
 
     $('.betCount').html(arr.length);
@@ -2248,6 +2326,7 @@ function BindloginOutClick() {
     });
 }
 
+//彩种切换
 function BindcaiSelectClick() {
     $('.caiSelect').click(function () {
 
@@ -2256,6 +2335,7 @@ function BindcaiSelectClick() {
         lType = cid;
 
         $(this).addClass('router-link-active').siblings().removeClass('router-link-active');
+
 
         Init();     //重新初始化彩种
     })
@@ -2512,8 +2592,11 @@ function LoadPeiLV() {
     var min = d.getMinutes();
 
 
-    //if ((hour >= 17 && hour < 21) || (hour == 21 && min < 20)) {
-    if (true) {
+    //判断是否封盘
+    if (!contains($('.c_time:visible').html(), '暂无期数')) {
+
+        //if ((hour >= 17 && hour < 21) || (hour == 21 && min < 20)) {
+        //if (true) {
 
         //开盘之后
 
@@ -2576,8 +2659,9 @@ function LoadPeiLV() {
             }
             else if (bigPlayName == '特肖首尾') {
 
+
                 //特肖
-                if (arr[0] != '停') {
+                if (arr[0].PeiLv != '停') {
 
                     var tArr = arr[0].PeiLv.split('/');
 
@@ -2597,14 +2681,44 @@ function LoadPeiLV() {
                 }
 
                 //特尾
-                $('.s_item-rate:visible:gt(11):lt(21)').html(arr[1].PeiLv);
+                if (arr[1].PeiLv != '停') {
 
-                if (arr[1].PeiLv == '停') {
-                    $('.s_item-rate:visible:gt(11):lt(21)').each(function () {
-                        $(this).parent().addClass('disabled');
-                        $(this).next().find('input').attr('disabled', 'disabled');
-                    })
+                    var tArr = arr[1].PeiLv.split('/');
+
+                    for (var i = 12; i < 22; i++) {
+
+                        if (i == 12) {
+                            $('.s_item-rate:visible').eq(i).html(tArr[1]);
+                        }
+                        else {
+                            $('.s_item-rate:visible').eq(i).html(tArr[0]);
+
+                        }
+                    }
                 }
+                else {
+
+
+                    //console.log(arr[1]);
+
+                    //alert(888);
+
+
+                    $('.s_item-rate:visible:gt(11):lt(21)').html(arr[1].PeiLv);
+
+                    if (arr[1].PeiLv == '停') {
+
+
+                        $('.s_item-rate:visible:gt(11):lt(21)').each(function () {
+                            $(this).parent().addClass('disabled');
+                            $(this).next().find('input').attr('disabled', 'disabled');
+                        })
+                    }
+                }
+
+
+
+
 
                 //头数
                 $('.s_item-rate:visible:gt(21):lt(26)').html(arr[2].PeiLv);
@@ -2665,13 +2779,31 @@ function LoadPeiLV() {
                             }
                         }
                         else {
-                            if (i == 2) {
-                                $('.s_item-rate:visible').eq(i).html(tArr[0]);
+
+
+                            if (smallPlayName == '一肖不中') {
+
+                                if (i == 2) {
+                                    $('.s_item-rate:visible').eq(i).html(tArr[1]);
+                                }
+                                else {
+                                    $('.s_item-rate:visible').eq(i).html(tArr[0]);
+
+                                }
                             }
                             else {
-                                $('.s_item-rate:visible').eq(i).html(tArr[1]);
 
+                                if (i == 2) {
+                                    $('.s_item-rate:visible').eq(i).html(tArr[0]);
+                                }
+                                else {
+                                    $('.s_item-rate:visible').eq(i).html(tArr[1]);
+
+                                }
                             }
+
+
+
                         }
 
 

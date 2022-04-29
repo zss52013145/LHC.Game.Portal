@@ -311,6 +311,10 @@ namespace ShenZhen.Lottery.Common
                 {
                     winCount = JudegeYiXiaoisWin(betNum, openArr);
                 }
+                else if (playName == "一肖不中")
+                {
+                    winCount = JudegeYiXiaoBuZhongisWin(betNum, openArr);
+                }
                 else if (playName == "尾数中")
                 {
                     winCount = JudegeWeiShuisWin(betNum, openArr);
@@ -322,6 +326,16 @@ namespace ShenZhen.Lottery.Common
                 else if (playName == "特肖")
                 {
                     winCount = JudegeTeXiaoisWin(betNum, openArr[6]);
+                }
+                else if (playName == "特尾")
+                {
+                    string wei = openArr[6].Substring(1, 1);   //特码的为尾数
+
+                    if (betNum.StartsWith(wei))
+                    {
+                        winCount++;
+                    }
+
                 }
                 else if (playName == "六肖")
                 {
@@ -1162,7 +1176,7 @@ namespace ShenZhen.Lottery.Common
                 if (playName.Contains("肖连") || playName.Contains("尾连") || playName == "三中二" || playName == "二中特")
                 {
 
-                    string peilvSql = "select peilv from playinfo2 where  lType = " + br.lType + " and  Pankou = '" + user.PanKou + "' and playSmallType ='" + playName + "'";
+                    string peilvSql = "select peilv from peilvinfo where  lType = " + br.lType + " and  Pankou = '" + user.PanKou + "' and playSmallType ='" + playName + "'";
 
                     object o = SqlHelper.ExecuteScalar(peilvSql);
 
@@ -1227,7 +1241,10 @@ namespace ShenZhen.Lottery.Common
 
             //object obj = tsi.GetType().GetProperty(user.PanKou).GetValue(tsi, null);
 
-            tuishui = Common2.GetTuiShuiRate(br.UserId, br.lType, user.PanKou, br.PlayName) * (br.BetCount * br.UnitMoney) / 100;
+            double betMoney = br.BetCount * br.UnitMoney / (double)100;
+
+            //总的退水比例
+            double ts = Common2.GetTuiShuiRate(br.UserId, br.lType, user.PanKou, br.PlayName, br.BetNum);  // *(br.BetCount * br.UnitMoney) / 100;
 
             double ts3 = 0;
             double ts4 = 0;
@@ -1258,10 +1275,10 @@ namespace ShenZhen.Lottery.Common
                 if (ts3 != 100 && ts4 != 100 && ts5 != 100)
                 {
 
-                    m2 = tuishui * ts3;
-                    m3 = tuishui * ts4;
-                    m4 = tuishui * ts5;
-                    m5 = tuishui * (1 - ts3 - ts4 - ts5);
+                    m2 = betMoney * ts3;
+                    m3 = betMoney * ts4;
+                    m4 = betMoney * ts5;
+                    m5 = betMoney * (ts - ts3 - ts4 - ts5);
 
                 }
                 else
@@ -1269,21 +1286,19 @@ namespace ShenZhen.Lottery.Common
 
                     if (ts3 == 100)
                     {
-                        m2 = tuishui;
+                        m2 = betMoney * ts;
                     }
                     else if (ts4 == 100)
                     {
-
-                        m2 = tuishui * ts3;
-
-                        m3 = tuishui * (1 - ts3);
+                        m2 = betMoney * ts3;
+                        m3 = betMoney * (ts - ts3);
                     }
                     else if (ts5 == 100)
                     {
 
-                        m2 = tuishui * ts3;
-                        m3 = tuishui * ts4;
-                        m4 = tuishui * (1 - ts3 - ts4);
+                        m2 = betMoney * ts3;
+                        m3 = betMoney * ts4;
+                        m4 = betMoney * (ts - ts3 - ts4);
                     }
                 }
 
@@ -1295,23 +1310,23 @@ namespace ShenZhen.Lottery.Common
 
                 if (ts3 != 100 && ts5 != 100)
                 {
-                    m2 = tuishui * ts3;
-                    m3 = tuishui * ts5;
+                    m2 = betMoney * ts3;
+                    m3 = betMoney * ts5;
 
-                    m5 = tuishui * (1 - ts3 - ts5);
+                    m5 = betMoney * (ts - ts3 - ts5);
 
                 }
                 else
                 {
-                    if (ts3 == 100)
+                    if (ts3 == 100)             //总代被全部扣除 相当于股东全吃
                     {
-                        m2 = tuishui;
+                        m2 = betMoney * ts;
                     }
                     else if (ts5 == 100)
                     {
-                        m2 = tuishui * ts3;
+                        m2 = betMoney * ts3;
 
-                        m3 = tuishui * (1 - ts3);
+                        m3 = betMoney * (ts - ts3);
                     }
 
                 }
@@ -1322,16 +1337,16 @@ namespace ShenZhen.Lottery.Common
 
                 if (ts5 == 0)
                 {
-                    m5 = tuishui;
+                    m5 = betMoney * ts;
                 }
                 else if (ts5 == 100)
                 {
-                    m2 = tuishui;
+                    m2 = betMoney * ts;
                 }
                 else
                 {
-                    m2 = tuishui * ts5;
-                    m5 = tuishui * (1 - ts5);
+                    m2 = betMoney * ts5;
+                    m5 = betMoney * (ts - ts5);
                 }
 
             }
@@ -1345,17 +1360,7 @@ namespace ShenZhen.Lottery.Common
 
             sql += "update BettingRecord set TuiShui2 = " + m2 + ",TuiShui3 = " + m3 + ",TuiShui4 = " + m4 + ",TuiShui5 = " + m5 + " where Id = " + br.Id;
 
-
-
-
-
-
-
-
-
-
-
-
+            sql += "update UserInfo set Money+=" + m5 + " where Id=" + user.Id;
 
 
             ////退水
@@ -1383,7 +1388,7 @@ namespace ShenZhen.Lottery.Common
             if (winCount == -1)
             {
                 //退还本金
-                decimal betMoney = (decimal)(br.BetCount * br.UnitMoney);
+                //decimal betMoney = (decimal)(br.BetCount * br.UnitMoney);
 
                 //tuishui += betMoney;
 
@@ -1399,7 +1404,7 @@ namespace ShenZhen.Lottery.Common
             if (tempMoney > 0 && user.Id > 0)
             {
                 decimal currentMoney = user.Money + tempMoney;
-                string mark = "返奖[" + Util.GetlTypeName(lType) + "]第[" + br.Issue + "]期";
+                string mark = "结算[" + Util.GetlTypeName(lType) + "]第[" + br.Issue + "]期";
 
                 sql += Util5.GetProfitLossSql(user.Id, 2, tempMoney, currentMoney, mark);
             }
@@ -2977,6 +2982,27 @@ namespace ShenZhen.Lottery.Common
                 if (temp.Contains(s))
                 {
                     winCount++;
+                    break;
+                }
+            }
+
+            return winCount;
+        }
+
+
+
+        //判断一肖是否中奖
+        public static int JudegeYiXiaoBuZhongisWin(string betNum, string[] openArr)
+        {
+            int winCount = 1;
+
+            string temp = Util.GetDigitByShengxiao(betNum);     //生肖对应的号码
+
+            foreach (string s in openArr)
+            {
+                if (temp.Contains(s))
+                {
+                    winCount = 0;
                     break;
                 }
             }

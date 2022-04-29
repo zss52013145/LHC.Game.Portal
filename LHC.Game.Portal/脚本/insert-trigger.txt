@@ -1,0 +1,63 @@
+﻿
+
+
+
+
+
+
+create trigger tgr_betingRecord_insert 
+on BettingRecord 
+for insert
+as
+    declare 
+			@Id			bigint,
+			@UserId		int,
+			@TryId		nvarchar(50),
+			@lType		int,
+			@Issue		nvarchar(50),
+			@BetCount	int,
+			@PlayName	nvarchar(50),
+			@BetNum		nvarchar(max),
+			@Peilv		decimal(18, 3),
+			@UnitMoney	int,
+			@WinCount	int,
+			@WinMoney	decimal(18, 3),
+			@TuiShui5	decimal(18, 3),
+			@TuiShui4	decimal(18, 3),
+			@TuiShui3	decimal(18, 3),
+			@TuiShui2	decimal(18, 3),
+			@WinState	int,
+			@Type		int,
+			@NewOrderId	nvarchar(50),
+			@SubTime	datetime,
+			@BetYE		decimal(18, 2),
+			@IsFromApp  bit;
+			
+			
+			
+    select @Id = Id,@UserId = UserId,@TryId = TryId,@lType = lType,@Issue = Issue,@BetCount = BetCount,@PlayName = PlayName,@BetNum = BetNum,@Peilv = Peilv,@UnitMoney = UnitMoney,
+           @WinCount = WinCount,@WinMoney = WinMoney,@TuiShui5 = TuiShui5,@TuiShui4 = TuiShui4,@TuiShui3 = TuiShui3,@TuiShui2 = TuiShui2,@WinState = WinState,@Type = Type,@NewOrderId = NewOrderId,@SubTime = SubTime,@BetYE = BetYE,@IsFromApp=IsFromApp from inserted;
+    
+    
+	--declare @shuying decimal(18,2);
+	--@shuying = (@WinMoney + @TuiShui) - (@BetCount*@UnitMoney);
+		
+		
+	--插入投注记录
+	
+	set IDENTITY_INSERT BettingRecordDay ON;
+	insert into BettingRecordDay(Id,UserId,TryId,lType,Issue,BetCount,PlayName,BetNum,Peilv,UnitMoney,WinCount,WinMoney,TuiShui5,TuiShui4,TuiShui3,TuiShui2	,WinState,Type,NewOrderId,SubTime,BetYE,IsFromApp) values (@Id,@UserId,@TryId,@lType,@Issue,@BetCount, @PlayName,@BetNum,@Peilv,@UnitMoney,@WinCount,@WinMoney,@TuiShui5,@TuiShui4,@TuiShui3,@TuiShui2,@WinState,@Type,@NewOrderId,@SubTime,@BetYE,@IsFromApp);
+	set IDENTITY_INSERT BettingRecordDay OFF;
+	
+	
+	
+	
+		
+		--drop trigger tgr_betingRecord_insert 
+		
+		
+		
+		
+		
+			
+			

@@ -1,0 +1,43 @@
+﻿
+
+
+create trigger tgr_betingRecord_update 
+on BettingRecord 
+for update
+as
+    declare 
+			@Id			bigint,
+			@BetCount	int,
+			@UnitMoney	int,
+			@WinCount	int,
+			@WinMoney	decimal(18, 3),
+			@TuiShui5	decimal(18, 3),
+			@TuiShui4	decimal(18, 3),
+			@TuiShui3	decimal(18, 3),
+			@TuiShui2	decimal(18, 3),
+			@WinState	int,
+			@Shuying decimal(18,2);
+			
+			
+			
+			
+    select @Id = Id,@BetCount = BetCount,@UnitMoney = UnitMoney,@WinCount = WinCount, @WinMoney = WinMoney,@TuiShui5 = TuiShui5,@TuiShui4 = TuiShui4,@TuiShui3 = TuiShui3,@TuiShui2 = TuiShui2,@WinState = WinState from inserted;
+    
+    
+	set @Shuying = (@WinMoney + @TuiShui5) - (@BetCount*@UnitMoney);
+		
+		
+	--更新投注记录
+	update BettingRecordDay set WinCount=@WinCount,WinMoney=@WinMoney,TuiShui5=@TuiShui5,TuiShui4=@TuiShui4,TuiShui3=@TuiShui3,TuiShui2=@TuiShui2,WinState=@WinState,SY=@Shuying  where Id = @Id; 
+
+	--update BettingRecordWeek set WinCount=@WinCount,WinMoney=@WinMoney,TuiShui=@TuiShui,WinState=@WinState,SY=@Shuying  where Id = @Id; 						
+	
+	--update BettingRecordMonth set WinCount=@WinCount,WinMoney=@WinMoney,TuiShui=@TuiShui,WinState=@WinState,SY=@Shuying  where Id = @Id; 						
+			
+	
+		
+		--drop trigger tgr_betingRecord_update
+		
+		
+		
+		

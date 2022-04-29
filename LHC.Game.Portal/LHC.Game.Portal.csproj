@@ -161,7 +161,10 @@
     <Content Include="static\img\back_red.4d39e24.png" />
     <Content Include="static\logo.png" />
     <Content Include="Test1.html" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Public\T6.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -170,6 +173,10 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="xieyi.html" />
+    <Content Include="脚本\insert-trigger.txt" />
+    <Content Include="脚本\update-trigger.txt" />
+    <Content Include="脚本\init.txt" />
+    <Content Include="脚本\查询数据库中的触发器.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -268,6 +275,9 @@
   <ItemGroup>
     <Content Include="Views\Record\Histrory4.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\lhc-qian.pubxml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -284,9 +294,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>15823</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:31670/</IISUrl>
+          <IISUrl>http://localhost:31673/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

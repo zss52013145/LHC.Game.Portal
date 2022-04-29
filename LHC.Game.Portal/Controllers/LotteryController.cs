@@ -16,6 +16,13 @@ namespace LHC.Game.Portal.Controllers
     public class LotteryController : BaseController
     {
 
+        //实时刷新
+        public ActionResult GetMoney()
+        {
+            return Content(LoginUser.Money + "");
+        }
+
+
 
         public ActionResult GetPeilv(int lType, string bigType, string smallType)
         {
@@ -161,7 +168,7 @@ namespace LHC.Game.Portal.Controllers
         }
 
 
-        
+
 
 
         /// <summary>
@@ -173,7 +180,7 @@ namespace LHC.Game.Portal.Controllers
 
             string time = DateTime.Now.ToString("yyyy-MM-dd") + " 0:0:0";
 
-            string sql = "select top(10)* from BettingRecord where lType = " + lType + " and  SubTime> '" + time + "' order by Id desc";
+            string sql = "select top(10)* from BettingRecord where lType = " + lType + " and  SubTime> '" + time + "' and winstate = 1 order by Id desc";
 
             List<BettingRecord> list = Util.ReaderToList<BettingRecord>(sql);
 

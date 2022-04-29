@@ -237,7 +237,7 @@ function afterLogin(data) {
 
         ShowTanMin('登录成功');
 
-        setTimeout('location.href = "/home/index";', 2000);
+        setTimeout('location.href = "/home/index";', 1000);
         
     }
 }

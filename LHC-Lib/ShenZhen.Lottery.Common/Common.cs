@@ -452,223 +452,149 @@ namespace ShenZhen.Lottery.Common
 
         public static bool IsLimit(int lType, decimal betMoney, string playName, string betNum, string issue, int userId)
         {
-            //特殊情况 新增加的官方彩种
-            #region 特殊情况
 
-            if (lType == 25 || lType == 27 || lType == 61 || lType == 81 || lType == 85)
-            {
-                lType = 1;
-            }
-            else if (lType == 19)
-            {
-                lType = 11;
-            }
-            else if (lType == 29 || lType == 31 || lType == 33)
-            {
-                lType = 13;
-            }
-            else if (lType == 35 || lType == 37 || lType == 39 || lType == 41 || lType == 43 || lType == 45 || lType == 47)
-            {
-                lType = 15;
-            }
-            else if (lType == 49 || lType == 51 || lType == 53 || lType == 55 || lType == 57 || lType == 59)
-            {
-                lType = 21;
-            }
-            else if (lType == 63)
-            {
-                lType = 23;
-            }
-            else if (lType == 83)
-            {
-                lType = 9;
-            }
-
-            #endregion
-
-
+            string playName2 = playName;
 
             bool result = false;
 
-            string sql = "select Value1,Value from BetLimit where lType = " + lType;
 
-            if (lType == 1 || lType == 11 || lType == 15 || lType == 81 || lType == 85)
+
+            #region 玩法 处理
+
+            if (playName.Contains("特码"))
             {
-                #region 重庆时时彩 3D 11选5
 
-                if (playName == "第一球" || playName == "第二球" || playName == "第三球" || playName == "第四球" || playName == "第五球" || playName == "豹顺对")
+                if (betNum == "单" || betNum == "双")
                 {
-                    sql += " and [Key]= '" + playName + "'";
+                    playName = "特码单双";
                 }
-                else if (playName == "前三" || playName == "中三" || playName == "后三")
+                else if (betNum == "大" || betNum == "小")
                 {
-                    sql += " and [Key]= '前中后'";
+                    playName = "特码大小";
                 }
-                else if (betNum.IndexOf("总和") != -1)
+                else if (betNum == "合单" || betNum == "合双")
                 {
-                    sql += " and [Key]= '总和'";
+                    playName = "特码合数单双";
                 }
-                else if (betNum == "龙" || betNum == "虎" || betNum == "和")
+                else if (betNum == "合大" || betNum == "合小")
                 {
-                    sql += " and [Key]= '龙虎和'";
+                    playName = "特码合数大小";
+                }
+                else if (betNum == "尾大" || betNum == "尾小")
+                {
+                    playName = "特码尾大尾小";
+                }
+                else if (betNum == "大单" || betNum == "小单")
+                {
+                    playName = "特码大单小单";
+                }
+                else if (betNum == "大双" || betNum == "小双")
+                {
+                    playName = "特码大双小双";
+                }
+                else if (betNum == "家禽" || betNum == "野禽")
+                {
+                    playName = "特码家禽野禽";
+                }
+                else if (betNum == "红波")
+                {
+                    playName = "特码色波-红波";
+                }
+                else if (betNum == "蓝波")
+                {
+                    playName = "特码色波-蓝波";
+                }
+                else if (betNum == "绿波")
+                {
+                    playName = "特码色波-绿波";
                 }
 
-                #endregion
             }
-            else if (lType == 3)
+            else if (playName.Contains("正码"))
             {
-                #region 六合彩
-
-                if (playName.IndexOf("特码") != -1)
+                if (betNum == "单" || betNum == "双")
                 {
-                    sql += " and [Key]= '特码'";
+                    playName = "总和单双";
                 }
-                else if (playName.IndexOf("正A") != -1 || playName.IndexOf("正B") != -1)
+                else if (betNum == "大" || betNum == "小")
                 {
-                    sql += " and [Key]= '正码'";
-                }
-                else if (playName.IndexOf("正码") != -1)
-                {
-                    sql += " and [Key]= '正码1-6'";
-                }
-                else if (playName == "正1特" || playName == "正2特" || playName == "正3特" || playName == "正4特" || playName == "正5特" || playName == "正6特")
-                {
-                    sql += " and [Key]= '正特'";
-                }
-                else if (playName == "三全中" || playName == "三中二" || playName == "二全中" || playName == "二中特" ||
-                         playName == "特串")
-                {
-                    sql += " and [Key]= '连码'";
-                }
-                else if (playName == "半波" || playName == "尾数" || playName == "一肖" || playName == "特肖")
-                {
-                    sql += " and [Key]= '" + playName + "'";
-                }
-                else if (playName == "五不中" || playName == "六不中" || playName == "七不中" || playName == "八不中" ||
-                         playName == "九不中" || playName == "十不中")
-                {
-                    sql += " and [Key]= '不中'";
-                }
-                else if (playName == "六肖连中" || playName == "六肖连不中")
-                {
-                    sql += " and [Key]= '六肖'";
-                }
-                else if (playName.IndexOf("连肖") != -1)
-                {
-                    sql += " and [Key]= '连肖'";
-                }
-                else if (playName.IndexOf("尾连") != -1)
-                {
-                    sql += " and [Key]= '连尾'";
-                }
-                else if (playName.IndexOf("-") != -1)
-                {
-                    sql += " and [Key]= '1-6龙虎'";
+                    playName = "总和大小";
                 }
 
-                #endregion
             }
-            else if (lType == 5)
+            else if (playName.Contains("正") && playName.Contains("特"))
             {
-                #region 七星彩
 
-                if (playName == "定千位" || playName == "定百位" || playName == "定十位" || playName == "定个位")
+                if (betNum == "单" || betNum == "双")
                 {
-                    sql += " and [Key]= '一定位'";
+                    playName = "正特单双";
                 }
-                else if (playName == "千##个" || playName == "#百十#" || playName == "千#十#" || playName == "#百#个" || playName == "千百##" || playName == "##十个")
+                else if (betNum == "大" || betNum == "小")
                 {
-                    sql += " and [Key]= '二定位'";
+                    playName = "正特大小";
                 }
-                else if (playName == "千百十#" || playName == "千百#个" || playName == "#百十个" || playName == "千#十个")
+                else if (betNum == "合单" || betNum == "合双")
                 {
-                    sql += " and [Key]= '三定位'";
+                    playName = "正特合数单双";
                 }
-                else if (playName == "四定位")
+                else if (betNum == "合大" || betNum == "合小")
                 {
-                    sql += " and [Key]= '四定位'";
+                    playName = "正特合数大小";
                 }
-
-                #endregion
-            }
-            else if (lType == 7 || lType == 9 || lType == 83)
-            {
-                #region PK10 幸运飞艇
-
-                if (playName == "冠军" || playName == "亚军" || playName == "第三名" || playName == "第四名" || playName == "第五名" ||
-                    playName == "第六名" || playName == "第七名" || playName == "第八名" || playName == "第九名" ||
-                    playName == "第十名")
+                else if (betNum == "尾大" || betNum == "尾小")
                 {
-                    sql += " and [Key]= '" + playName + "'";
+                    playName = "正特尾大尾小";
+                }
+                else if (betNum == "大单" || betNum == "小单")
+                {
+                    playName = "正特大单小单";
+                }
+                else if (betNum == "大双" || betNum == "小双")
+                {
+                    playName = "正特大双小双";
+                }
+                else if (betNum == "家禽" || betNum == "野禽")
+                {
+                    playName = "正特家禽野禽";
+                }
+                else if (betNum == "红波")
+                {
+                    playName = "正特色波-红波";
+                }
+                else if (betNum == "蓝波")
+                {
+                    playName = "正特色波-蓝波";
+                }
+                else if (betNum == "绿波")
+                {
+                    playName = "正特色波-绿波";
                 }
                 else
                 {
-                    sql += " and [Key]= '冠亚和'";
+                    playName = "正特";
                 }
 
-                #endregion
-            }
-            else if (lType == 13 || lType == 17)
-            {
-                #region 广东快乐十分 幸运农场
-
-                if (playName == "第一球" || playName == "第二球" || playName == "第三球" || playName == "第四球" || playName == "第五球" ||
-                    playName == "第六球" || playName == "第七球" || playName == "第八球")
-                {
-                    sql += " and [Key]= '" + playName + "'";
-                }
-                else if (playName.IndexOf("总和") != -1)
-                {
-                    sql += " and [Key]= '总和'";
-                }
-                else if (playName.IndexOf("总和") != -1)
-                {
-                    sql += " and [Key]= '连码'";
-                }
-
-
-                #endregion
-            }
-            else if (lType == 21)
-            {
-                #region 江苏快三
-
-                if (string.IsNullOrEmpty(playName))         //特殊情况  18-5-18
-                {
-                    playName = "豹子";
-                }
-
-                sql += " and [Key]= '" + playName + "'";
-
-                #endregion
-            }
-            else if (lType == 23)
-            {
-                #region 加拿大28
-
-                if (playName == "特码")
-                {
-                    sql += " and [Key]= '" + playName + "'";
-                }
-                else
-                {
-                    sql += " and [Key]= '混合'";
-                }
-
-                #endregion
             }
 
 
-            BetLimit betLimit = Util.ReaderToModel<BetLimit>(sql);
+
+
+            #endregion
+
+            string sql = "select Max1,Max2 from Tuishuiinfo where lType = " + lType + " and  UserId=" + userId + " and playname='" + playName + "'";
+
+
+
+            TuiShuiInfo betLimit = Util.ReaderToModel<TuiShuiInfo>(sql);
 
             //判断
             //int limitMoney = (int)SqlHelper.ExecuteScalar(sql);
 
 
             //单注
-            if (betLimit.Value1 > 0)
+            if (betLimit.Max1 > 0)
             {
-                if (betMoney > betLimit.Value1)
+                if (betMoney > betLimit.Max1)
                 {
                     result = true;
                 }
@@ -676,13 +602,13 @@ namespace ShenZhen.Lottery.Common
 
 
             //单期
-            if (betLimit.Value > 0 && !result)
+            if (betLimit.Max2 > 0 && !result)
             {
                 //10-29--加上已经投注的金额
-                string seaSql = "select sum(BetCount * UnitMoney) from BettingRecordWeek where PlayName=@PlayName and Issue=@Issue and UserId=" + userId;
+                string seaSql = "select sum(BetCount * UnitMoney) from BettingRecord where PlayName=@PlayName and Issue=@Issue and UserId=" + userId;
                 SqlParameter[] parameter =
                 {
-                    new SqlParameter("@PlayName", playName),
+                    new SqlParameter("@PlayName", playName2),
                     new SqlParameter("@Issue", issue),
                 };
 
@@ -699,7 +625,7 @@ namespace ShenZhen.Lottery.Common
                 //End10-29
 
 
-                if ((betMoney + alreadyBetMoney) > betLimit.Value)
+                if ((betMoney + alreadyBetMoney) > betLimit.Max2)
                 {
                     result = true;
                 }
@@ -2382,12 +2308,12 @@ namespace ShenZhen.Lottery.Common
             var data = from s in list
                        group s by new { s.PlayName, s.BetNum }
                            into g
-                       select new PossibleWin
-                       {
-                           PlayName = g.Key.PlayName,
-                           BetNum = g.Key.BetNum,
-                           WinMoney = g.Sum(s => s.WinMoney)
-                       };
+                           select new PossibleWin
+                           {
+                               PlayName = g.Key.PlayName,
+                               BetNum = g.Key.BetNum,
+                               WinMoney = g.Sum(s => s.WinMoney)
+                           };
 
             //排序
             data = data.OrderByDescending(p => p.WinMoney);
@@ -10833,19 +10759,13 @@ namespace ShenZhen.Lottery.Common
             string sql = "select count(1) from LotteryRecord where lType= " + lType + " and Issue ='" + issue + "'";
             int count = Convert.ToInt32(SqlHelper.ExecuteScalarForFenZhan(fenzhan, sql));
 
+            //int count = Util.GetCountByDataBase(sql);
+
 
 
             if (count == 0)
             {
-                //if (lType == 81)
-                //{
-                //    num = Common.CreateJisuNumForAZXY5(81);
-
-                //    sql = "delete  from  Data where  lType = 2  and  Num = '" + num + "'";
-                //    SqlHelper.ExecuteNonQueryForFenZhan(2, sql);
-                //}
-
-
+                
                 //添加记录
                 sql = "insert into LotteryRecord(lType,Issue,Num,SubTime) values(" + lType + ",'" + issue + "','" + num + "','" + time + "')";
                 SqlHelper.ExecuteNonQueryForFenZhan(fenzhan, sql);

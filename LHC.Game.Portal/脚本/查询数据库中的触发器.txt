@@ -1,0 +1,2 @@
+﻿
+SELECT * FROM Sysobjects WHERE xtype = 'TR'

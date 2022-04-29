@@ -106,7 +106,7 @@ namespace ShenZhen.Lottery.Public
                 catch (Exception ex)
                 {
                     LogHelper.WriteLog(ex.Message + ex.StackTrace.ToString());
-                    
+
 
                     conn.Dispose();
                 }
@@ -274,10 +274,8 @@ namespace ShenZhen.Lottery.Public
 
                     try
                     {
-                        if (pms != null)
-                        {
-                            cmd.Parameters.AddRange(pms);
-                        }
+                        if (pms != null) cmd.Parameters.AddRange(pms);
+                      
                         conn.Open();
                         object obj = cmd.ExecuteScalar();
                         cmd.Parameters.Clear();
@@ -286,7 +284,7 @@ namespace ShenZhen.Lottery.Public
                     }
                     catch (Exception ex)
                     {
-
+                        int a = 0;
                     }
                     finally
                     {
@@ -311,9 +309,16 @@ namespace ShenZhen.Lottery.Public
             HandConnStr(fenzhan);
 
             SqlConnection conn = new SqlConnection(fenzhanStr);
+
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                if (pms != null) cmd.Parameters.AddRange(pms);
+                if (pms != null)
+                {
+                    //cmd.Parameters.Clear();
+
+                    cmd.Parameters.AddRange(pms);
+                }
+
                 try
                 {
                     conn.Open();

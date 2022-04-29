@@ -206,11 +206,38 @@ namespace ShenZhen.Lottery.Model
         {
             get
             {
-                string s = GetNextIds(this.Id);
+                //string s = GetNextIds(this.Id);
+
+                //return s.Split(',').Length - 1;
+
+                string s = GetAllNextIds2(this.Id).TrimEnd(',');
 
                 return s.Split(',').Length - 1;
             }
         }
+
+
+
+        public static string GetAllNextIds2(int userId)
+        {
+            string ids = "";
+
+            List<UserInfo> list = Util.ReaderToList<UserInfo>("select * from UserInfo where PId = " + userId);
+
+            ids += userId + ",";
+
+            if (list.Count >= 1)
+            {
+                foreach (UserInfo user in list)
+                {
+                    ids += GetAllNextIds2(user.Id);
+                }
+            }
+
+            return ids;
+        }
+
+
 
 
         public decimal NextAllMoney

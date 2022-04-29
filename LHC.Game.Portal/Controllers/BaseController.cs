@@ -37,7 +37,7 @@ namespace LHC.Game.Portal.Controllers
 
 
 
-
+           
             string controller = filterContext.RouteData.Values["controller"].ToString().ToLower();
             string action = filterContext.RouteData.Values["action"].ToString().ToLower();
 

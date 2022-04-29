@@ -11,7 +11,7 @@ namespace ShenZhen.Lottery.Public
     {
 
 
-       
+
 
         public static void AddTuiShui(object userId, int lType, double kouchu, string pankou)
         {
@@ -372,12 +372,40 @@ namespace ShenZhen.Lottery.Public
         {
 
             DateTime d = DateTime.Now;
+            
+            #region 香港特殊判断
+
+            if (lType == 1)
+            {
+
+                string date1 = d.ToString("yyyy-MM-dd");
+
+                string sql = "select DateLine1 from  DateLine where  lType = 1";
+
+                DateTime d2 = (DateTime)SqlHelper.ExecuteScalar(sql);
+
+                string date2 = d2.ToString("yyyy-MM-dd");
+
+                if (date1 != date2)
+                {
+                    return "已封盘";
+                }
+
+            }
+
+
+
+
+
+            #endregion
+
 
             DateTime t = DateTime.Parse(d.ToString("yyyy-MM-dd") + " 21:24:00");
 
             DateTime t2 = DateTime.Parse(d.ToString("yyyy-MM-dd") + " 17:00:00");
 
-            if (d > t) return "已封盘";
+            if (d > t || d < t2) return "已封盘";
+            //if (d > t) return "已封盘";
 
             return GetTwoDateCha(d, t);
 
@@ -654,7 +682,20 @@ namespace ShenZhen.Lottery.Public
                     return double.Parse(arr[1]);
                 }
             }
-            else if (playName == "尾数中")
+            else if (playName == "一肖不中")
+            {
+                arr = o.ToString().Split('/');
+
+                if (betNum == thisYearSX)
+                {
+                    return double.Parse(arr[1]);
+                }
+                else
+                {
+                    return double.Parse(arr[0]);
+                }
+            }
+            else if (playName == "特尾" || playName == "尾数中")
             {
                 arr = o.ToString().Split('/');
 
@@ -694,8 +735,17 @@ namespace ShenZhen.Lottery.Public
 
         public static bool JudgeBetCorrect(int lType, string bigPlayName, string smallPlayName, string betInfo)
         {
+
+            string[] tuoArr = null;
+
+            string[] tuoArr1 = null;
+            string[] tuoArr2 = null;
+
+
             string[] arr = null;   // betInfo.Split('|');
             string betNum = "";   //arr[2];
+
+
 
 
             string[] betArr = betInfo.Split(',');
@@ -785,6 +835,26 @@ namespace ShenZhen.Lottery.Public
                 else if (smallPlayName.Contains("四")) len = 4;
                 else if (smallPlayName.Contains("五")) len = 5;
 
+
+                if (betInfo.Contains("拖"))
+                {
+                    tuoArr = betInfo.Split('拖');
+
+                    tuoArr1 = tuoArr[0].Split(',');
+                    tuoArr2 = tuoArr[1].Split(',');
+
+
+                    if (tuoArr1.Length != (len - 1) || tuoArr2.Length < 1)
+                    {
+                        return false;
+                    }
+
+                    return true;
+
+                }
+
+
+
                 //长度限制
                 if (!JudgeBetNumLength(betArr, len, 12))
                 {
@@ -821,6 +891,24 @@ namespace ShenZhen.Lottery.Public
                 if (smallPlayName.Contains("三")) len = 3;
                 else if (smallPlayName.Contains("四")) len = 4;
                 else if (smallPlayName.Contains("五")) len = 5;
+
+
+                if (betInfo.Contains("拖"))
+                {
+                    tuoArr = betInfo.Split('拖');
+
+                    tuoArr1 = tuoArr[0].Split(',');
+                    tuoArr2 = tuoArr[1].Split(',');
+
+
+                    if (tuoArr1.Length != (len - 1) || tuoArr2.Length < 1)
+                    {
+                        return false;
+                    }
+
+                    return true;
+
+                }
 
                 //长度限制
                 if (!JudgeBetNumLength(betArr, len, 8))

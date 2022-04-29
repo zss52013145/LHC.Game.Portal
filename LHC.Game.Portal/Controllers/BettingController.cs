@@ -57,13 +57,15 @@ namespace LHC.Game.Portal.Controllers
 
 
             //判断单子的正确性 - 针对投注号码
-            if (!Util5.JudgeBetCorrect(lType,bigPlayName,smallPlayName, betInfo))
+            if (!Util5.JudgeBetCorrect(lType, bigPlayName, smallPlayName, betInfo))
             {
                 return Content("数据错误");
             }
 
 
             string[] infoArr = betInfo.Split('|');  //一条表示一个单子
+
+            decimal tempMoney = 0;
 
 
             #region 4.判断余额是否足够下单
@@ -73,6 +75,14 @@ namespace LHC.Game.Portal.Controllers
             if (bigPlayName.Contains("连") || bigPlayName.Contains("合肖") || bigPlayName == "特平中" || bigPlayName == "中一" || bigPlayName == "自选不中")
             {
                 allMoney = betCount * money;
+
+                //判断单笔限额
+                if (Common.IsLimit(lType, allMoney, smallPlayName, betInfo, issue, LoginUser.Id))
+                {
+                    return Content("投注超过限额");
+                }
+
+
             }
             else
             {
@@ -91,7 +101,17 @@ namespace LHC.Game.Portal.Controllers
                         //    return Content("数据错误");
                         //}
 
+                        tempMoney = int.Parse(arr[2]);          //每个单子的金额
+
                         allMoney += int.Parse(arr[2]);
+
+
+                        //判断单笔限额
+                        if (Common.IsLimit(lType, tempMoney, smallPlayName, arr[0], issue, LoginUser.Id))
+                        {
+                            return Content("投注超过限额");
+                        }
+
 
                         if (allMoney < 0)
                         {
@@ -185,6 +205,16 @@ namespace LHC.Game.Portal.Controllers
                     #endregion
 
 
+                    #region 特殊情况   一肖首尾----特尾
+
+                    if (smallPlayName == "特肖" && betNum.EndsWith("尾"))
+                    {
+                        smallPlayName = "特尾";
+                    }
+
+                    #endregion
+
+
                     ////判断投注注数是否正确
                     //if (betCount != Util.CalcBetCount(lType, smallPlayName, betNum))
                     //{
@@ -207,6 +237,9 @@ namespace LHC.Game.Portal.Controllers
                     decimal userCurrMoney = Common.GetUserMoneyById(LoginUser.Id);
                     decimal betYue = userCurrMoney - (unitMoney * betCount);
                     sql = "insert into BettingRecord(lType,Issue,BetCount,PlayName,BetNum,UnitMoney,Peilv,UserId,BetYE) values (@lType,@Issue,@BetCount,@PlayName,@BetNum,@UnitMoney," + peilv + "," + LoginUser.Id + "," + betYue + ")";
+
+
+                    
 
 
                     SqlParameter[] pms =

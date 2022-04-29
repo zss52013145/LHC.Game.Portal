@@ -17,8 +17,8 @@ namespace LHC.Game.Portal.Controllers
         public ActionResult Index(int id = 3)
         {
             ViewBag.lType = id;
-            
-            string sql = "select sum(betcount*unitmoney) from BettingRecord where WinState = 1";
+
+            string sql = "select sum(betcount*unitmoney) from BettingRecord where WinState = 1 and userid = " + LoginUser.Id;
 
             ViewBag.weijieMoney = Util.GetCountByDataBase(sql); //未结金额
 
@@ -29,9 +29,19 @@ namespace LHC.Game.Portal.Controllers
             string time1 = date + " 0:0:0";
             string time2 = date + " 23:59:59";
 
-            sql = "select sum( winMoney + tuishui -   betcount*unitmoney) from BettingRecord where WinState <> 1 and  SubTime > '" + time1 + "' and  SubTime <'" + time2 + "'";
+            sql = "select sum( winMoney + tuishui5 -   betcount*unitmoney) from BettingRecord where WinState > 1 and  SubTime > '" + time1 + "' and  SubTime <'" + time2 + "' and userid = " + LoginUser.Id;
 
-            ViewBag.todaySY = Util.GetCountByDataBase3(sql); 
+            ViewBag.todaySY = Util.GetCountByDataBase3(sql);
+
+
+
+            //公告
+
+            sql = "select top(1)* from  Notice order by Id desc";
+            Notice n = Util.ReaderToModel<Notice>(sql);
+            ViewBag.notice = n.Content;
+
+
 
             return View();
         }
